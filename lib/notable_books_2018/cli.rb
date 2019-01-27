@@ -9,11 +9,13 @@ class NotableBooks2018::CLI
 
   def welcome
     puts "Welcome to Notable Books of 2018."
-    puts "You can use this gem to find more information about etc..."
+    puts <<~DOC
+      In 2018, the New York Times Book review published a list of notable new book releases.
+      You can use this gem to browse 2018's notable book selections and find more information about each book.
+    DOC
   end
 
   def main_menu
-    # How to phrase this?
     puts <<~DOC
 
       Please enter a number to see a list of books.
@@ -39,7 +41,14 @@ class NotableBooks2018::CLI
       #initial input to choose numbered list of books
       input = gets.chomp.to_i
 
-      print_book_list(input)
+      #Edge case control: Only allow user to enter a valid number 1-100
+      if (1..100).include?(input)
+        print_book_list(input)
+      else
+        puts "That is not a valid selection."
+        main_menu
+        book_selector
+      end
 
       puts "Enter the number of a book you would like more information about."
       #How to make it so that user could enter "exit" even when not prompted and still exit?
@@ -73,7 +82,7 @@ class NotableBooks2018::CLI
   end
 
   def print_book_list(by_number)
-
+    #When user enters 101+, this Displaying tag no longer is accurate. How to fix?
       puts "Displaying Notable Books #{by_number} - #{by_number+9}"
       puts ""
 
