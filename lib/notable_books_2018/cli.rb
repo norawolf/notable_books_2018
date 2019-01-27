@@ -51,7 +51,10 @@ class NotableBooks2018::CLI
       end
 
       puts "Enter the number of a book you would like more information about."
-      #How to make it so that user could enter "exit" even when not prompted and still exit?
+      # Currently, user can enter any number. 1-100 will return details for referenced book,
+      # not just the numbered list that appears on screen
+      # number outside the range goes to "Would you like to see another book."
+      # FIX! Limit user input to displayed range. How?
       input = gets.chomp.to_i
 
       print_book_info(input)
@@ -95,6 +98,7 @@ class NotableBooks2018::CLI
   def print_book_info(book_index)
     NotableBooks2018::Book.all.each.with_index(1) do |book, index|
       if index == book_index
+        puts ""
         puts book.title
         puts "by #{book.author}"
         puts ""
