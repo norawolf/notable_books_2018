@@ -7,14 +7,12 @@ class NotableBooks2018::Scraper
 
 
   def self.scrape_book_info
-    # like the student scraper lab
     book_array = []
      scrape_page.css(".g-book-data").each do |nodeset|
        book_hash = {}
        book_hash[:title] = nodeset.css(".g-book-title").text.strip
        book_hash[:author] = nodeset.css(".g-book-author b").text.strip
-       #book_hash[:genre] = nodeset.css(".g-book-tag").text.strip
-       binding.pry
+       book_hash[:genre] = nodeset.css(".g-book-tag").text.split.join(' ')
        book_hash[:description] = nodeset.css(".g-book-description").text.strip
       book_array << book_hash
       end
