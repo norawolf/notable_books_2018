@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/environment.rb"
-require_relative "../lib/notable_books_2018/cli.rb"
+#require_relative "../lib/environment.rb"
+#require_relative "../lib/notable_books_2018/cli.rb"
+
+require "bundler/setup"
+require "environment"
 
 NotableBooks2018::CLI.new.start
