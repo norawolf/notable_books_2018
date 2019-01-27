@@ -22,15 +22,15 @@ class NotableBooks2018::CLI
 
       Books:
       1-10
-      11-19
-      20-29
-      30-39
-      40-49
-      50-59
-      60-69
-      70-79
-      80-89
-      90-100
+      11-20
+      21-30
+      31-40
+      41-50
+      51-60
+      61-70
+      71-80
+      81-90
+      91-100
     DOC
   end
 
@@ -85,9 +85,13 @@ class NotableBooks2018::CLI
   end
 
   def print_book_list(by_number)
-    #When user enters 101+, this Displaying tag no longer is accurate. How to fix?
+    if by_number >= 92
+      puts "Displaying Notable Books #{by_number} - 100"
+      puts ""
+    else
       puts "Displaying Notable Books #{by_number} - #{by_number+9}"
       puts ""
+    end
 
       NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
         puts "#{index}. #{book.title} by #{book.author}"
