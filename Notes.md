@@ -2,27 +2,22 @@ TO CONTINUE
   - Scraping book data and creating a hash with book data attributes WORKS in Scraper.scrape_book_info
   - Calling create_books in the CLI WORKS
   - So, book objects are being created and returned
+  - Right now, the CLI appears to be functioning correctly.
 
-  - Just discovered that some books (starting on index 30 - the Odyssey) have 2 genres listed under nested tags. Overall class ".g-book-tags". Then, for example.
+Gameplan Today:
+- Scraping for Review URL!
+- Once CLI is working - displaying numbered lists of books (title, author, description), can work
+    on scraping more difficult data (genre, publisher, price, book and review urls)
 
-  <span class="g-book-tag" data-slug="fiction">
-                        Fiction.
-                      </span>
-  <span class="g-book-tag" data-slug="poetry">
-          Poetry.
-  </span>
+Bigger TODO:
+- Test for edge cases in CLI input
+- Questions: Do you always have to see your input in your terminal? Is there a way to make it disappear from the display after #gets?
+- Best practices to do spacing?
+- See books by genre
+- See books alphabetical by title
+- See books by author
 
-- Includes /n that isn't getting removed with .strip
-- I have temporarily commented out the :genre attr_accessor in Book and the book_hash[:genre]
-in Scraper, until I figure out how to handle this weird data.
-- Going to have to book_hash[:genre] = nodeset.css(".g-book-tag").text.strip.delete!("\n\s")
-  # gets rid of all newlines and white spaces
-
-  of the ones that have two genres listed (some have 3)
-  pry(NotableBooks2018::Scraper)> book_hash[:genre] = nodeset.css(".g-book-tag")[0].text.strip
-  does access the first one??
-
-
+- Additional functionality: Save a book to a reading list!
 
 # alternate way to create books inside the NotableBooks2018::Scraper
 #  def self.scrape_book_info
@@ -58,28 +53,5 @@ Possible additions:
 - Seach books by Genre
 - Search Books by Author
 
-First idea for scraping data into hashes -- seems like extra work!
-html = "https://www.nytimes.com/interactive/2018/11/19/books/review/100-notable-books.html"
-page = Nokogiri::HTML(open(html))
-binding.pry
-books_array = []
-page.css(".g-books").each do |nodeset|
-  book_hash = {}
-  #  publisher = parsed data
-  #  price = parsed data
-  book_hash[:cover_url]
-  book_hash[:title] = nodeset.css(".g-book-title").text
-  book_hash[:author] = nodeset.css(".g-book-author b").text
-  book_hash[:genre] = nodeset.css("span.g-book-tag").text.strip
-#  book_hash[:publisher] = publisher
-#  book_hash[:price] = price
-  book_hash[:description] = nodeset.css(".g-book-description").text
-  # some book titles also have links to reviews. how to include url for optional review?
-
-
-  # each book listing becomes a hash inside an array
-  # assign the attributes
-  #later, turn each has into a Book object a la the student scraper lab
-  books_array << books_hash
-  end
-   books_array
+- Additional attributes to scrape that require extra parsing
+:publisher, :price, :cover_url, :review_link (only some have this)
