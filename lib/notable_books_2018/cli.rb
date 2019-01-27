@@ -1,6 +1,9 @@
 class NotableBooks2018::CLI
   def start
     welcome
+    #NotableBooks2018::Scraper.scrape_book_info
+    #NotableBooks2018::Book.all
+    create_books
     main_menu
     book_selector
     goodbye
@@ -62,7 +65,15 @@ class NotableBooks2018::CLI
     end
   end
 
+  def create_books
+    books_array = NotableBooks2018::Scraper.scrape_book_info
+    NotableBooks2018::Book.create_from_collection(books_array)
+  end
+
   def print_book_list(by_number)
+      #NotableBooks2018::Book.all.each.with_index(1) do |book, index|
+        #puts "#{index}. #{book.title} by #{book.author}"
+      #end
       puts "1. Title by Author"
       puts "2. Title by Author"
       puts "3. Title by Author"
@@ -72,6 +83,7 @@ class NotableBooks2018::CLI
 
 
   def print_book_info(book_index)
+    #NotableBooks2018.Book.information
     puts <<-HEREDOC
     Book cover URL
     Book author
