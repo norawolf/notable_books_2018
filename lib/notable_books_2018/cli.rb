@@ -10,15 +10,13 @@ class NotableBooks2018::CLI
   def welcome
     puts "Welcome to Notable Books of 2018."
     puts <<~DOC
-      In 2018, the New York Times Book review published a list of notable new book releases.
+      In 2018, the New York Times Book Review published a list of notable new book releases.
       You can use this gem to browse 2018's notable book selections and find more information about each book.
     DOC
   end
 
   def main_menu
     puts <<~DOC
-
-      Please enter a number to see a list of books.
 
       Books:
       1-10
@@ -31,33 +29,36 @@ class NotableBooks2018::CLI
       71-80
       81-90
       91-100
+
     DOC
   end
 
   def book_selector
-    input = nil
+    first_input = nil
 
-    while input != "exit"
-      #initial input to choose numbered list of books
-      input = gets.chomp.to_i
+    while first_input != "exit"
+      puts "Please enter a number to see a list of books."
+      first_input = gets.chomp.to_i
 
       #Edge case control: Only allow user to enter a valid number 1-100
-      if (1..100).include?(input)
-        print_book_list(input)
+      if (1..100).include?(first_input)
+        print_book_list(first_input)
       else
         puts "That is not a valid selection."
-        main_menu
+        # keep main_menu here or no?
         book_selector
       end
 
       puts "Enter the number of a book you would like more information about."
+      second_input = gets.chomp.to_i
+
       # Currently, user can enter any number. 1-100 will return details for referenced book,
       # not just the numbered list that appears on screen
       # number outside the range goes to "Would you like to see another book."
-      # FIX! Limit user input to displayed range. How?
-      input = gets.chomp.to_i
+      # FIX! Limit user input to displayed range.
 
-      print_book_info(input)
+
+      print_book_info(second_input)
 
       puts "Would you like to see another book? Enter 'Yes' or 'No'."
 
@@ -85,11 +86,15 @@ class NotableBooks2018::CLI
   end
 
   def print_book_list(by_number)
-    if by_number >= 92
-      puts "Displaying Notable Books #{by_number} - 100"
+    puts ""
+    if by_number == 100
+      puts "The 100th Notable Book"
+      puts ""
+    elsif by_number >= 92 && by_number != 100
+      puts "Notable Books #{by_number} - 100"
       puts ""
     else
-      puts "Displaying Notable Books #{by_number} - #{by_number+9}"
+      puts "Notable Books #{by_number} - #{by_number+9}"
       puts ""
     end
 
