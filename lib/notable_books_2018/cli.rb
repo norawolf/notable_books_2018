@@ -45,7 +45,6 @@ class NotableBooks2018::CLI
         print_book_list(first_input)
       else
         puts "That is not a valid selection."
-        # keep main_menu here or no?
         book_selector
       end
 
@@ -66,7 +65,6 @@ class NotableBooks2018::CLI
 
       case input
         when "yes"
-          # should this go to the main menu, or back to the smaller list? if so, how?
           main_menu
           book_selector
         when "no"
@@ -98,9 +96,9 @@ class NotableBooks2018::CLI
       puts ""
     end
 
-      NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
-        puts "#{index}. #{book.title} by #{book.author}"
-      end
+    NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
+      puts "#{index}. #{book.title} by #{book.author}"
+    end
   end
 
 
