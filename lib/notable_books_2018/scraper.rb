@@ -20,4 +20,21 @@ class NotableBooks2018::Scraper
       NotableBooks2018::Book.create_from_collection(books_array)
   end
 
+  #could create a helper method to correctly parse & format genres
+  # currently, genre is a string containing 1-3 values
+  # would like for a Book to have one or multiple Genre instances
+
+  # def genre_parse
+    #creates an array of string data, removes whitespace
+    #genre_data = nodeset.css(".g-book-tag").text.split
+
+    #if genre_data.size = 1
+      # create one new Genre, assign it to book_hash[:genre]
+    #if genre_data.size = 2
+      # above x2
+    #if genre_data.size = 3
+     # above x3
+   #end
+
+  # end
 end
