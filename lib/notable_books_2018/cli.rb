@@ -1,15 +1,13 @@
 class NotableBooks2018::CLI
 
-  def start
-    welcome
+  def run
     NotableBooks2018::Scraper.scrape_book_info
-    main_menu
-    book_selector
+    browse_books
     goodbye
   end
 
   def welcome
-    puts "Welcome to Notable Books of 2018!"
+    puts "\nWelcome to Notable Books of 2018!"
     puts "--------------------------------------------"
     puts <<~DOC
       The New York Times Book Review published a list of notable new book releases in 2018.
@@ -20,22 +18,30 @@ class NotableBooks2018::CLI
   def main_menu
     puts <<~DOC
 
-      Books:
-      1-10
-      11-20
-      21-30
-      31-40
-      41-50
-      51-60
-      61-70
-      71-80
-      81-90
-      91-100
+      View Books:
+                  1-10
+                  11-20
+                  21-30
+                  31-40
+                  41-50
+                  51-60
+                  61-70
+                  71-80
+                  81-90
+                  91-100
 
     DOC
   end
 
-  def book_selector
+  def browse_books
+      welcome
+      select_book_list
+      select_book_by_number
+      see_more_books?
+  end
+
+  def select_book_list
+    main_menu
     @first_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
@@ -48,40 +54,37 @@ class NotableBooks2018::CLI
         goodbye
       else
         puts "That is not a valid selection."
-        book_selector
+        select_book_list
       end
+      puts ""
+  end
 
-      select_book_by_number
-
+    def see_more_books?
       puts "Would you like to see another book? Enter 'Yes' or 'No'."
 
       input = gets.chomp.downcase
 
       case input
         when "yes"
-          main_menu
-          book_selector
+          select_book_list
         when "no"
           goodbye
          else
           puts "That is not a valid selection."
-          main_menu
-          book_selector
+          select_book_list
       end
-
-    #end
-  end
+    end
 
   def print_book_list(by_number)
     puts ""
     if by_number == 100
-      puts "The 100th Notable Book"
+      puts "Displaying The 100th Notable Book"
       puts ""
     elsif by_number >= 92 && by_number != 100
-      puts "Notable Books #{by_number} - 100"
+      puts "Displaying Notable Books #{by_number} - 100"
       puts ""
     else
-      puts "Notable Books #{by_number} - #{by_number+9}"
+      puts "Displaying Notable Books #{by_number} - #{by_number+9}"
       puts ""
     end
 
