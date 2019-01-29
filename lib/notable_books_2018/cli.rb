@@ -115,9 +115,11 @@ class NotableBooks2018::CLI
         puts book.title
         puts "by #{book.author}"
         puts ""
-        puts "Genre(s): #{book.genre}"
-        puts ""
-        puts "Description: #{book.description}"
+        puts "Genre(s):"
+          book.genre.collect do |genre|
+            puts genre.name
+          end
+        puts "\nDescription: #{book.description}"
         puts ""
         #How to display book description with auto line wrapping? Or is it just my terminal
       end
