@@ -1,18 +1,22 @@
-TO CONTINUE
-  - Right now, the CLI appears to be functioning correctly.
-
-Gameplan Today:
+TO CONTINUE:
 - Scraping for Review URL! -- Need help!
 - can work on scraping more difficult data (genre, publisher, price, book and review urls)
-- Once I control for edgecases via input in #book_selector - should some input cues be extracted into helper methods to DRY?
+- Start adding features for a Genre class
+- Notes for Blog Post
+- Recording
 
 Bigger TODO:
-- Test for edge cases in CLI input
-- Questions: Do you always have to see your input in your terminal? Is there a way to make it disappear from the display after #gets?
-- Best practices to do spacing?
+- Best practices for CLI spacing, dividers, and linebreaks?
 - Colorize! for fun!
 - Additional attributes to scrape that require extra parsing (additional method?):
       :publisher, :price, :cover_url, :review_link (only some have this)
+
+
+-Assessment - Keep In Mind
+  - line by line explanation
+  - how everything is connected
+  - require vs. require_relative
+  - how are files being executed in bin/notable-books-2018
 
 
 - Additional functionality: Save a book to a reading list!
@@ -22,20 +26,8 @@ Bigger TODO:
   - use a gem to pixelate cover in the terminal?
 - Big dreams functionality: Check if a library near you has a copy of this book!
 
-Logic Needed to fix print_book_info conditionals:
-  #some kind of loop. put in a helper method? case statement?
-  # If second_input is not within the list range output above by print_book_list
-  # keep asking for second_input until it is within range
-  # then, print_book_info(second_input)
-
-  # a way to check if the second_input number is one of the numbered list currently being displayed.
-  # if (first_input..(first_input+9)).include?(second_input)
-  #   print_book_info(second_input)
-  # else
-  #   puts "Please select a valid number from the list."
-  #   second_input = gets.chomp.to_i until (first_input..(first_input+9)).include?(second_input)
-  # end
-
+Genre Class functionality notes:
+  - 
 
 
 # alternate way to create books inside the NotableBooks2018::Scraper
