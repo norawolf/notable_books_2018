@@ -39,22 +39,19 @@ class NotableBooks2018::CLI
     @first_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
-    while @first_input != "exit"
       puts "Please enter a number to see a list of books or enter 'exit' to quit."
-      @first_input = gets.chomp.to_i
+      @first_input = gets.chomp
 
-      #Edge case control: Only allow user to enter a valid number 1-100
-      if (1..100).include?(@first_input)
-        print_book_list(@first_input)
-      #elsif @first_input.to_s == "exit" #exit is not working
-        #goodbye
+      if (1..100).include?(@first_input.to_i)
+        print_book_list(@first_input.to_i)
+      elsif @first_input.downcase == "exit"
+        goodbye
       else
         puts "That is not a valid selection."
         book_selector
       end
 
       select_book_by_number
-      ##second selection method
 
       puts "Would you like to see another book? Enter 'Yes' or 'No'."
 
@@ -72,7 +69,7 @@ class NotableBooks2018::CLI
           book_selector
       end
 
-    end
+    #end
   end
 
   def print_book_list(by_number)
@@ -95,15 +92,14 @@ class NotableBooks2018::CLI
 
   def select_book_by_number
     puts "Enter the number of a book you would like more information about or enter 'exit' to quit."
-    second_input = gets.chomp.to_i
+    second_input = gets.chomp
 
-    if (@first_input..(@first_input+9)).include?(second_input)
-      print_book_info(second_input)
-    elsif second_input.to_s == "exit"
+    if ((@first_input.to_i)..((@first_input.to_i)+9)).include?(second_input.to_i)
+      print_book_info(second_input.to_i)
+    elsif second_input.downcase == "exit"
       goodbye
     else
-      # fix the puts to display actual numbers
-      puts "Please select a valid number from the list."
+      puts "Please enter a number #{@first_input.to_i}-#{(@first_input.to_i)+9} to get book information."
       select_book_by_number
     end
   end
