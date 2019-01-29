@@ -1,16 +1,17 @@
 class NotableBooks2018::CLI
   def start
     welcome
-    create_books
+    NotableBooks2018::Scraper.scrape_book_info
     main_menu
     book_selector
     goodbye
   end
 
   def welcome
-    puts "Welcome to Notable Books of 2018."
+    puts "Welcome to Notable Books of 2018!"
+    puts "--------------------------------------------"
     puts <<~DOC
-      In 2018, the New York Times Book Review published a list of notable new book releases.
+      The New York Times Book Review published a list of notable new book releases in 2018.
       You can use this gem to browse 2018's notable book selections and find more information about each book.
     DOC
   end
@@ -36,6 +37,9 @@ class NotableBooks2018::CLI
   def book_selector
     first_input = nil
 
+    #INSTANCE VARIABLES to store this input from gets.chomp
+    # also can use ||=, maybe
+    # if input is equal to nil, run this block of code
     while first_input != "exit"
       puts "Please enter a number to see a list of books."
       first_input = gets.chomp.to_i
@@ -48,6 +52,7 @@ class NotableBooks2018::CLI
         book_selector
       end
 
+      #this should become another method
       puts "Enter the number of a book you would like more information about."
       second_input = gets.chomp.to_i
 
@@ -55,6 +60,15 @@ class NotableBooks2018::CLI
       # not just the numbered list that appears on screen
       # number outside the range goes to "Would you like to see another book."
       # FIX! Limit user input to displayed range.
+
+      # a way to check if the second_input number is one of the numbered list currently being displayed.
+      # if (first_input..(first_input+9)).include?(second_input)
+      #   print_book_info(second_input)
+      # else
+      #   puts "Please select a valid number from the list. (DISPLAY ACTUAL LISTED NUMBERS)"
+      #   call the second_method again
+      # second_input = gets.chomp.to_i until (first_input..(first_input+9)).include?(second_input)
+      # end
 
 
       print_book_info(second_input)
@@ -76,11 +90,6 @@ class NotableBooks2018::CLI
       end
 
     end
-  end
-
-  def create_books
-    books_array ||= NotableBooks2018::Scraper.scrape_book_info
-    NotableBooks2018::Book.create_from_collection(books_array)
   end
 
   def print_book_list(by_number)
