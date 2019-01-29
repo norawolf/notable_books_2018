@@ -2,7 +2,8 @@ class NotableBooks2018::CLI
 
   def run
     NotableBooks2018::Scraper.scrape_book_info
-    browse_books
+    welcome
+    select_book_list
     goodbye
   end
 
@@ -15,33 +16,26 @@ class NotableBooks2018::CLI
     DOC
   end
 
-  def main_menu
+  def display_list
     puts <<~DOC
 
       View Books:
-                  1-10
-                  11-20
-                  21-30
-                  31-40
-                  41-50
-                  51-60
-                  61-70
-                  71-80
-                  81-90
-                  91-100
+        1-10
+        11-20
+        21-30
+        31-40
+        41-50
+        51-60
+        61-70
+        71-80
+        81-90
+        91-100
 
     DOC
   end
 
-  def browse_books
-      welcome
-      select_book_list
-      select_book_by_number
-      see_more_books?
-  end
-
   def select_book_list
-    main_menu
+    display_list
     @first_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
@@ -50,6 +44,8 @@ class NotableBooks2018::CLI
 
       if (1..100).include?(@first_input.to_i)
         print_book_list(@first_input.to_i)
+        select_book_by_number
+        see_more_books?
       elsif @first_input.downcase == "exit"
         goodbye
       else
@@ -57,6 +53,22 @@ class NotableBooks2018::CLI
         select_book_list
       end
       puts ""
+  end
+
+  def select_book_by_number
+    puts "Enter the number of a book you would like more information about or enter 'exit' to quit."
+    second_input = gets.chomp
+
+    if ((@first_input.to_i)..((@first_input.to_i)+9)).include?(second_input.to_i)
+      print_book_info(second_input.to_i)
+    elsif second_input.downcase == "exit"
+      goodbye
+    else
+      puts "Please enter a number #{@first_input.to_i}-#{(@first_input.to_i)+9} to get book information."
+      select_book_by_number
+    end
+
+    #see_more_books?
   end
 
     def see_more_books?
@@ -93,19 +105,7 @@ class NotableBooks2018::CLI
     end
   end
 
-  def select_book_by_number
-    puts "Enter the number of a book you would like more information about or enter 'exit' to quit."
-    second_input = gets.chomp
 
-    if ((@first_input.to_i)..((@first_input.to_i)+9)).include?(second_input.to_i)
-      print_book_info(second_input.to_i)
-    elsif second_input.downcase == "exit"
-      goodbye
-    else
-      puts "Please enter a number #{@first_input.to_i}-#{(@first_input.to_i)+9} to get book information."
-      select_book_by_number
-    end
-  end
 
 
   def print_book_info(book_index)
