@@ -7,21 +7,9 @@ class NotableBooks2018::Scraper
 
   def self.genre_parse(css)
     genre_data = css
-
-    #refactor later
-    if genre_data.size == 1
-      NotableBooks2018::Genre.new(genre_data[0])
-    elsif genre_data.size == 2
-      array = []
-      array << NotableBooks2018::Genre.new(genre_data[0])
-      array << NotableBooks2018::Genre.new(genre_data[1])
-      array
-    elsif genre_data.size == 3
-      array = []
-     array << NotableBooks2018::Genre.new(genre_data[0])
-     array << NotableBooks2018::Genre.new(genre_data[1])
-     array << NotableBooks2018::Genre.new(genre_data[2])
-     array
+    
+    genre_data.collect do |genre_name|
+      NotableBooks2018::Genre.new(genre_name)
     end
   end
 
