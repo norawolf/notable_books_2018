@@ -16,12 +16,6 @@ class NotableBooks2018::Scraper
        book_hash[:description] = nodeset.css(".g-book-description").text.strip
       books_array << book_hash
       end
-      NotableBooks2018::Book.create_from_collection(books_array) # Book creation happens here!
+      NotableBooks2018::Book.create_from_collection(books_array)
   end
-
-  # def self.scrape_more_info
-      # expanded functionality to scrape for
-      # :cover_url
-      # and scrape + parse :publisher and :price and :review_url
-  # end
 end
