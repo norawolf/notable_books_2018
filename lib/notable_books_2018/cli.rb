@@ -41,12 +41,14 @@ class NotableBooks2018::CLI
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
     while first_input != "exit"
-      puts "Please enter a number to see a list of books."
-      first_input = gets.chomp.to_i
+      puts "Please enter a number to see a list of books or enter 'exit' to quit."
+      first_input = gets.chomp
 
       #Edge case control: Only allow user to enter a valid number 1-100
       if (1..100).include?(first_input)
         print_book_list(first_input)
+      elsif first_input.to_s == "exit"
+        goodbye
       else
         puts "That is not a valid selection."
         book_selector
@@ -123,9 +125,6 @@ class NotableBooks2018::CLI
         puts "Description: #{book.description}"
         puts ""
         #How to display book description with auto line wrapping? Or is it just my terminal
-        # and small screen?
-        # formatting - lines?
-        # colorizing?
       end
     end
   end
