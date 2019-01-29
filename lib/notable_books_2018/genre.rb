@@ -1,12 +1,14 @@
 class NotableBooks2018::Genre
 
   attr_accessor :name
+  attr_reader :books
 
   @@all = []
 
   def initialize(name)
     @name = name
     @@all << self
+    @books = []
   end
 
   def self.all
