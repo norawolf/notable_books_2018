@@ -19,12 +19,8 @@ class NotableBooks2018::Genre
     all.find {|genre| genre.name == name}
   end
 
-  def save
-    @@all << self
-  end
-
   def self.create_by_name(name)
-    NotableBooks2018::Genre.new(name).tap {|genre| genre.save}
+    NotableBooks2018::Genre.new(name)
   end
 
   def self.find_or_create_by_name(name)
