@@ -1,4 +1,5 @@
 class NotableBooks2018::CLI
+
   def start
     welcome
     NotableBooks2018::Scraper.scrape_book_info
@@ -35,45 +36,25 @@ class NotableBooks2018::CLI
   end
 
   def book_selector
-    first_input = nil
-
-    #INSTANCE VARIABLES to store this input from gets.chomp
+    @first_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
-    while first_input != "exit"
+    while @first_input != "exit"
       puts "Please enter a number to see a list of books or enter 'exit' to quit."
-      first_input = gets.chomp
+      @first_input = gets.chomp.to_i
 
       #Edge case control: Only allow user to enter a valid number 1-100
-      if (1..100).include?(first_input)
-        print_book_list(first_input)
-      elsif first_input.to_s == "exit"
-        goodbye
+      if (1..100).include?(@first_input)
+        print_book_list(@first_input)
+      #elsif @first_input.to_s == "exit" #exit is not working
+        #goodbye
       else
         puts "That is not a valid selection."
         book_selector
       end
 
-      #this should become another method
-      puts "Enter the number of a book you would like more information about."
-      second_input = gets.chomp.to_i
-
-      # Currently, user can enter any number. 1-100 will return details for referenced book,
-      # not just the numbered list that appears on screen
-      # number outside the range goes to "Would you like to see another book."
-      # FIX! Limit user input to displayed range.
-
-      # a way to check if the second_input number is one of the numbered list currently being displayed.
-      # if (first_input..(first_input+9)).include?(second_input)
-      #   print_book_info(second_input)
-      # else
-      #   puts "Please select a valid number from the list. (DISPLAY ACTUAL LISTED NUMBERS)"
-      #   call the second_method again
-      # second_input = gets.chomp.to_i until (first_input..(first_input+9)).include?(second_input)
-      # end
-
-
-      print_book_info(second_input)
+      select_book_by_number
+      ##second selection method
 
       puts "Would you like to see another book? Enter 'Yes' or 'No'."
 
@@ -109,6 +90,21 @@ class NotableBooks2018::CLI
 
     NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
       puts "#{index}. #{book.title} by #{book.author}"
+    end
+  end
+
+  def select_book_by_number
+    puts "Enter the number of a book you would like more information about or enter 'exit' to quit."
+    second_input = gets.chomp.to_i
+
+    if (@first_input..(@first_input+9)).include?(second_input)
+      print_book_info(second_input)
+    elsif second_input.to_s == "exit"
+      goodbye
+    else
+      # fix the puts to display actual numbers
+      puts "Please select a valid number from the list."
+      select_book_by_number
     end
   end
 
