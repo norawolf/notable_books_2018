@@ -1,7 +1,9 @@
-TO CONTINUE:
+TO DO NEXT:
+- Fix parsing for Genre attributes. Currently, "Current Affairs" becomes "Current" and "Affairs"
+    and "Foreign Affairs" becomes just "Foreign" ?
+
 - Scraping for Review URL! -- Need help!
-- can work on scraping more difficult data (genre, publisher, price, book and review urls)
-- Start adding features for a Genre class
+- can work on scraping more difficult data (genre, publisher, price, book and review urls
 - Notes for Blog Post
 - Recording
 
@@ -10,6 +12,7 @@ Bigger TODO:
 - Colorize! for fun!
 - Additional attributes to scrape that require extra parsing (additional method?):
       :publisher, :price, :cover_url, :review_link (only some have this)
+- investigate line wrapping (for description)
 
 
 -Assessment - Keep In Mind
@@ -27,7 +30,7 @@ Bigger TODO:
 - Big dreams functionality: Check if a library near you has a copy of this book!
 
 Genre Class functionality notes:
-  - 
+  -
 
 
 # alternate way to create books inside the NotableBooks2018::Scraper
