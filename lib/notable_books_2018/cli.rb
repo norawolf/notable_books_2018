@@ -7,8 +7,8 @@ class NotableBooks2018::CLI
   end
 
   def welcome
-    puts "\nWelcome to Notable Books of 2018!"
-    puts "--------------------------------------------"
+    puts Paint["\nWelcome to Notable Books of 2018!", :bright]
+    puts "-------------------------------------------"
     puts <<~DOC
       The New York Times Book Review published a list of notable new book releases in 2018.
       You can use this gem to browse 2018's notable book selections and find more information about each book.
@@ -56,8 +56,8 @@ class NotableBooks2018::CLI
   end
 
   def choose_genre
-    puts "\nEnter a genre name to browse its books."
-    puts "Enter 'main' to return to the main menu or 'exit' to quit."
+    puts "\nEnter a #{Paint["genre name", :magenta]} to browse its books."
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
 
     @genre_name = gets.chomp.downcase
 
@@ -75,7 +75,7 @@ class NotableBooks2018::CLI
 
   def display_books_by_genre(genre_name)
     #this capitalization works for all but "Comics/graphics."
-    puts "\nViewing All #{genre_name.split.map(&:capitalize!).join(" ")} Books"
+    puts "\nViewing The #{genre_name.split.map(&:capitalize!).join(" ")} Genre"
     puts ""
 
     @indices_from_genre = []
@@ -90,8 +90,8 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number_through_genre
-    puts "\nEnter the number of a book you would like to read more about."
-    puts "Or, you can enter 'list' to return the genre list or 'exit' to quit."
+    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like to read more about."
+    puts "Or, you can enter #{Paint["'list'", :magenta]} to return the genre list or #{Paint["'exit'", :magenta]} to quit."
 
     @book_index_from_genre = gets.chomp
 
@@ -132,10 +132,10 @@ class NotableBooks2018::CLI
   def see_more_books_by_genre?
     puts <<~DOC
       Would you like to see another book?
-        Enter 'Yes' to return to your chosen genre's books.
-        You can enter 'list' to return to all genres.
-        You can enter 'number' to switch to browsing books by number.
-        Or enter 'exit' to quit.
+        Enter #{Paint["'yes'", :magenta]} to return to your chosen genre's books.
+        You can enter #{Paint["'list'", :magenta]} to return to all genres.
+        You can enter #{Paint["'number'", :magenta]} to switch to browsing books by number.
+        Or enter #{Paint["'exit'", :magenta]} to quit.
     DOC
 
     input = gets.chomp.downcase
@@ -163,8 +163,8 @@ class NotableBooks2018::CLI
     @number_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
-      puts "\nPlease enter a number to see a list of books."
-      puts "You can enter 'main' to return to the main menu or 'exit' to quit."
+      puts "\nPlease enter a #{Paint["number", :magenta]} to see a list of books."
+      puts "You can enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
       @number_input = gets.chomp
 
       if (1..100).include?(@number_input.to_i)
@@ -202,8 +202,8 @@ class NotableBooks2018::CLI
 
   def select_book_by_number
     # ADD HERE an option to return to main menu
-    puts "\nEnter the number of a book you would like more information about."
-    puts "Enter 'list' to return to the book list or 'exit' to quit."
+    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like more information about."
+    puts "Enter #{Paint["'list'", :magenta]} to return to the book list or #{Paint["'exit'", :magenta]} to quit."
     second_input = gets.chomp
 
     if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
@@ -223,9 +223,9 @@ class NotableBooks2018::CLI
     def see_more_books?
       puts <<~DOC
         Would you like to see another book?
-          Enter 'yes' to return to the book list.
-          You can enter 'genre' to switch to browsing books by genre.
-          Or enter 'exit' to quit.
+          Enter #{Paint["'yes'", :magenta]} to return to the book list.
+          You can enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
+          Or enter #{Paint["'exit'", :magenta]} to quit.
       DOC
 
       input = gets.chomp.downcase
