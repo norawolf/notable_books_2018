@@ -208,7 +208,7 @@ class NotableBooks2018::CLI
     puts ""
   end
 
-def print_book_list(by_number)
+  def print_book_list(by_number)
     if by_number == 100
       puts "\n--------------------------------------------"
       puts "#{Paint["Displaying The 100th Notable Book", :bright]}"
@@ -224,10 +224,10 @@ def print_book_list(by_number)
       puts ""
     end
 
-  NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
-    puts "#{index}. #{book.title} by #{book.author}"
+    NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
+      puts "#{index}. #{book.title} by #{book.author}"
+    end
   end
-end
 
 
   def select_book_by_number
@@ -265,13 +265,13 @@ end
     end
   end
 
-    def see_more_books?
-      puts <<~DOC
-        Would you like to see another book?
-          Enter #{Paint["'yes'", :magenta]} to return to the book list.
-          You can enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
-          Or enter #{Paint["'exit'", :magenta]} to quit.
-      DOC
+  def see_more_books?
+    puts <<~DOC
+      Would you like to see another book?
+        Enter #{Paint["'yes'", :magenta]} to return to the book list.
+        You can enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
+        Or enter #{Paint["'exit'", :magenta]} to quit.
+    DOC
 
       input = gets.chomp.downcase
 
