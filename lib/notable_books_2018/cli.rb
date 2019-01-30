@@ -72,7 +72,7 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number_through_genre
-    puts "\n Please enter the number of a book you would like to read more about."
+    puts "\nPlease enter the number of a book you would like to read more about."
 
     @book_index_from_genre = gets.chomp.to_i
 
