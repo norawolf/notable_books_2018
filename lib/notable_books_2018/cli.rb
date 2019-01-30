@@ -38,12 +38,14 @@ class NotableBooks2018::CLI
   def view_books_by_genre
     list_genres
     choose_genre
-    display_books_by_genre #comment out after pry
+    display_books_by_genre
+    select_book_by_number_through_genre
   end
 
   def list_genres
     puts "\nDisplaying All Genres"
     puts "\n"
+    # could alphabetize genre names with: NotableBooks2018::Genre.all.sort_by{|genre| genre.name}.each do..
     NotableBooks2018::Genre.all.each do |genre|
       puts genre.name
     end
@@ -56,12 +58,24 @@ class NotableBooks2018::CLI
   end
 
   def display_books_by_genre
+    #this capitalization works for all but "Comics/graphics"
+    puts "\nViewing all #{@genre_input.split.map(&:capitalize!).join(" ")} books."
+    puts ""
     NotableBooks2018::Genre.all.each do |genre|
       if @genre_input == genre.name.downcase
         genre.books.each.with_index(1) do |book, index|
           puts "#{index}. #{book.title} by #{book.author}"
         end
       end
+    end
+  end
+
+  def select_book_by_number_through_genre
+    puts "\n Please enter the number of a book you would like to read more about."
+  end
+
+  def print_book_info_from_genre(book_index)
+    NotableBooks2018::Genre.all.each do |genre|
     end
   end
 
