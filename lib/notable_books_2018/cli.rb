@@ -3,7 +3,6 @@ class NotableBooks2018::CLI
   def run
     NotableBooks2018::Scraper.scrape_book_info
     welcome
-    #view_books_by_list
     goodbye
   end
 
@@ -31,7 +30,7 @@ class NotableBooks2018::CLI
       view_books_by_list
     else
       puts "That is not a valid selection."
-      first_choice
+      choose_display
     end
   end
 
