@@ -40,6 +40,7 @@ class NotableBooks2018::CLI
     choose_genre
     display_books_by_genre
     select_book_by_number_through_genre
+    see_more_books_by_genre?
   end
 
   def list_genres
@@ -96,6 +97,26 @@ class NotableBooks2018::CLI
           end
         end
       end
+    end
+  end
+
+  def see_more_books_by_genre?
+    puts "Would you like to see another book? Enter 'Yes' to return to your chosen genre's books."
+    puts "Or, you can enter 'list' to return to all genres."
+    puts "Or type 'exit' to quit."
+
+    input = gets.chomp
+
+    case input
+      when "yes"
+        display_books_by_genre
+        select_book_by_number_through_genre
+        print_book_info_from_genre(@book_index_from_genre)
+        see_more_books_by_genre?
+      when "list"
+        view_books_by_genre
+      when "exit"
+        goodbye
     end
   end
 
