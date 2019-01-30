@@ -37,17 +37,18 @@ class NotableBooks2018::CLI
   def view_books_by_genre
     list_genres
     choose_genre
-    display_books_by_genre
     select_book_by_number_through_genre
     see_more_books_by_genre?
   end
 
   def list_genres
+    @all_genre_names = []
     puts "\nDisplaying All Genres"
     puts "\n"
     # could alphabetize genre names with: NotableBooks2018::Genre.all.sort_by{|genre| genre.name}.each do..
-    NotableBooks2018::Genre.all.each do |genre|
+    NotableBooks2018::Genre.all.collect do |genre|
       puts genre.name
+      @all_genre_names << genre.name.downcase
     end
   end
 
@@ -55,14 +56,21 @@ class NotableBooks2018::CLI
     puts "\nPlease enter the name of the genre's books you would like to browse."
 
     @genre_name = gets.chomp.downcase
+
+    if @all_genre_names.include?(@genre_name)
+      display_books_by_genre(@genre_name)
+    else
+      puts "That is not a valid entry."
+      choose_genre
+    end
   end
 
-  def display_books_by_genre
+  def display_books_by_genre(genre_name)
     #this capitalization works for all but "Comics/graphics."
-    puts "\nViewing all #{@genre_name.split.map(&:capitalize!).join(" ")} books."
+    puts "\nViewing all #{genre_name.split.map(&:capitalize!).join(" ")} books."
     puts ""
     NotableBooks2018::Genre.all.each do |genre|
-      if @genre_name == genre.name.downcase
+      if genre_name == genre.name.downcase
         genre.books.each.with_index(1) do |book, index|
           puts "#{index}. #{book.title} by #{book.author}"
         end
@@ -104,7 +112,7 @@ class NotableBooks2018::CLI
     puts "Or, you can enter 'list' to return to all genres."
     puts "Or type 'exit' to quit."
 
-    input = gets.chomp
+    input = gets.chomp.downcase
 
     case input
       when "yes"
