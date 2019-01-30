@@ -196,13 +196,14 @@ class NotableBooks2018::CLI
 
   def select_book_by_number
     # ADD HERE an option to return to main menu
-    puts "\nEnter the number of a book you would like more information about or enter 'exit' to quit."
+    puts "\nEnter the number of a book you would like more information about."
+    puts "Enter 'list' to return to the book list or 'exit' to quit."
     second_input = gets.chomp
 
     if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
       print_book_info(second_input.to_i)
-    #elsif second_input == "genre"
-      #call view_books_by_genre sequence
+    elsif second_input == "list"
+      view_books_by_list
     elsif second_input.downcase == "exit"
       goodbye
     else
@@ -214,14 +215,13 @@ class NotableBooks2018::CLI
   end
 
     def see_more_books?
-      # ADD, or enter "main" to return to the main menu.
       puts <<~DOC
         Would you like to see another book?
           Enter 'yes' to return to the book list.
           You can enter 'genre' to switch to browsing books by genre.
           Or enter 'exit' to quit.
       DOC
-      
+
       input = gets.chomp.downcase
 
       case input
