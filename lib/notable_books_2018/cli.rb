@@ -148,7 +148,7 @@ class NotableBooks2018::CLI
 
     case input
       when "yes"
-        display_books_by_genre
+        display_books_by_genre(@genre_name)
         select_book_by_number_through_genre
         print_book_info_from_genre(@book_index_from_genre)
         see_more_books_by_genre?
@@ -191,17 +191,19 @@ class NotableBooks2018::CLI
   def display_list
     puts <<~DOC
 
-      View Books:
-        1-10
-        11-20
-        21-30
-        31-40
-        41-50
-        51-60
-        61-70
-        71-80
-        81-90
-        91-100
+      --------------------------------------------
+
+      #{Paint["View Books Numbered:", :bright]}
+      1-10
+      11-20
+      21-30
+      31-40
+      41-50
+      51-60
+      61-70
+      71-80
+      81-90
+      91-100
 
     DOC
   end
@@ -249,18 +251,21 @@ class NotableBooks2018::CLI
       end
     end
 
-  def print_book_list(by_number)
-    puts ""
-    if by_number == 100
-      puts "Displaying The 100th Notable Book"
-      puts ""
-    elsif by_number >= 92 && by_number != 100
-      puts "Displaying Notable Books #{by_number} - 100"
-      puts ""
-    else
-      puts "Displaying Notable Books #{by_number} - #{by_number+9}"
-      puts ""
-    end
+    def print_book_list(by_number)
+      if by_number == 100
+        puts "\n--------------------------------------------"
+        puts "#{Paint["Displaying The 100th Notable Book", :bright]}"
+        puts "--------------------------------------------"
+      elsif by_number >= 92 && by_number != 100
+        puts "\n--------------------------------------------"
+        puts "#{Paint["Displaying Notable Books #{by_number} - 100", :bright]}"
+        "--------------------------------------------"
+      else
+        puts "\n--------------------------------------------"
+        puts "#{Paint["Displaying Notable Books #{by_number} - #{by_number+9}", :bright]}"
+        puts "--------------------------------------------"
+        puts ""
+      end
 
     NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
       puts "#{index}. #{book.title} by #{book.author}"
@@ -270,15 +275,16 @@ class NotableBooks2018::CLI
   def print_book_info(book_index)
     NotableBooks2018::Book.all.each.with_index(1) do |book, index|
       if index == book_index
-        puts ""
-        puts book.title
+        puts "\n--------------------------------------------"
+        puts Paint["#{book.title}", :bright]
         puts "by #{book.author}"
-        puts ""
-        puts "Genre(s):"
+        puts "--------------------------------------------"
+        puts Paint["\nGenre(s):", :bright]
           book.genre.collect do |genre|
-            puts genre.name
+            puts "#{genre.name}"
           end
-        puts "\nDescription: #{book.description}"
+        puts Paint["\nDescription:",:bright]
+        puts book.description
         puts ""
       end
     end
