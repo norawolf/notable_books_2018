@@ -1,9 +1,14 @@
 TO DO NEXT:
-- Fix parsing for Genre attributes. Currently, "Current Affairs" becomes "Current" and "Affairs"
-    and "Foreign Affairs" becomes just "Foreign" ?
+- OK wow, everything *appears* to be working basically correctly
+- Go through Genre methods to add
+  - ability to exist
+  - controls for invalid inputs
+  - etc
+- Formatting. Final proof text outputs.
 
 - Scraping for Review URL! -- Need help!
 - can work on scraping more difficult data (genre, publisher, price, book and review urls
+  - if you scrape these, be sure to add to both genre and list #print methods
 - Notes for Blog Post
 - Recording
 
