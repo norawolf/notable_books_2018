@@ -20,16 +20,19 @@ class NotableBooks2018::CLI
   end
 
   def choose_display
-    puts "\nEnter 1 to view books by genre, or"
-    puts "Enter 2 to view books by numbered list."
+    puts "\nEnter #{Paint["1", :magenta]} to view books by genre."
+    puts "Enter #{Paint["2", :magenta]} to view books by numbered list."
+    puts "Or, enter #{Paint["exit", :magenta]} to quit."
 
-    input = gets.chomp.to_i
-    if input == 1
+    input = gets.chomp
+    if input.to_i == 1
       view_books_by_genre
-    elsif input == 2
+    elsif input.to_i == 2
       view_books_by_list
+    elsif input == "exit"
+      goodbye
     else
-      puts "That is not a valid selection."
+      puts "\nThat is not a valid selection."
       choose_display
     end
   end
