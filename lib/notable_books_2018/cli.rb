@@ -54,11 +54,14 @@ class NotableBooks2018::CLI
 
   def choose_genre
     puts "\nPlease enter the name of the genre's books you would like to browse."
+    puts "Or, type 'exit' to quit."
 
     @genre_name = gets.chomp.downcase
 
     if @all_genre_names.include?(@genre_name)
       display_books_by_genre(@genre_name)
+    elsif @genre_name == "exit"
+      goodbye
     else
       puts "That is not a valid entry."
       choose_genre
