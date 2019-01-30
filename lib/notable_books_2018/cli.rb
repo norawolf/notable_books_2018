@@ -276,7 +276,7 @@ class NotableBooks2018::CLI
   end
 
   def goodbye
-    puts "\nThank you for browsing. Goodbye!"
+    puts "\nThank you for browsing Notable Books 2018. Happy reading!"
     exit
   end
 
