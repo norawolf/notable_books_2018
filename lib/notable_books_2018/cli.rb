@@ -3,7 +3,7 @@ class NotableBooks2018::CLI
   def run
     NotableBooks2018::Scraper.scrape_book_info
     welcome
-    select_book_by_list
+    view_books_by_list
     goodbye
   end
 
@@ -15,7 +15,6 @@ class NotableBooks2018::CLI
       You can use this gem to browse 2018's notable book selections and find more information about each book.
 
       You can view books by genre or view books by numbered list.
-
     DOC
 
     choose_display
@@ -29,32 +28,35 @@ class NotableBooks2018::CLI
     if input == 1
       puts "Testing functionality."
     elsif input == 2
-      select_book_by_list
+      view_books_by_list
     else
       puts "That is not a valid selection."
       first_choice
     end
   end
 
-  def select_book_by_list
+  def view_books_by_list
     display_list
     @first_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
-      puts "Please enter a number to see a list of books or enter 'exit' to quit."
+      puts "\nPlease enter a number to see a list of books or enter 'exit' to quit."
       @first_input = gets.chomp
 
       if (1..100).include?(@first_input.to_i)
         print_book_list(@first_input.to_i)
-        select_book_by_list
+        select_book_by_number
         see_more_books?
       elsif @first_input.downcase == "exit"
         goodbye
       else
         puts "That is not a valid selection."
-        select_book_list
+        view_books_by_list
       end
       puts ""
+  end
+
+  def view_books_by_genre
   end
 
   def display_list
@@ -76,7 +78,7 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number
-    puts "Enter the number of a book you would like more information about or enter 'exit' to quit."
+    puts "\nEnter the number of a book you would like more information about or enter 'exit' to quit."
     second_input = gets.chomp
 
     if ((@first_input.to_i)..((@first_input.to_i)+9)).include?(second_input.to_i)
@@ -84,7 +86,7 @@ class NotableBooks2018::CLI
     elsif second_input.downcase == "exit"
       goodbye
     else
-      puts "Please enter a number #{@first_input.to_i}-#{(@first_input.to_i)+9} to get book information."
+      puts "\nPlease enter a number #{@first_input.to_i}-#{(@first_input.to_i)+9} to get book information."
       select_book_by_number
     end
 
@@ -92,18 +94,18 @@ class NotableBooks2018::CLI
   end
 
     def see_more_books?
-      puts "Would you like to see another book? Enter 'Yes' or 'No'."
+      puts "\nWould you like to see another book? Enter 'Yes' or 'No'."
 
       input = gets.chomp.downcase
 
       case input
         when "yes"
-          select_book_list
+          view_books_by_list
         when "no"
           goodbye
          else
           puts "That is not a valid selection."
-          select_book_list
+          view_books_by_list
       end
     end
 
@@ -147,7 +149,7 @@ class NotableBooks2018::CLI
 
 
   def goodbye
-    puts "Thank you for browsing. Goodbye!"
+    puts "\nThank you for browsing. Goodbye!"
     exit
   end
 
