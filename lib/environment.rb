@@ -1,6 +1,7 @@
 require "pry"
 require "nokogiri"
 require "open-uri"
+require "paint"
 
 # here we will require all relevant files in dir notable_books_2018
 
