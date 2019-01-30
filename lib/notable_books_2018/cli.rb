@@ -128,7 +128,8 @@ class NotableBooks2018::CLI
 
   def see_more_books_by_genre?
     puts "Would you like to see another book? Enter 'Yes' to return to your chosen genre's books."
-    puts "Or, you can enter 'list' to return to all genres."
+    puts "You can enter 'list' to return to all genres."
+    puts "You can enter 'number' to switch to browsing books by number."
     puts "Or type 'exit' to quit."
 
     input = gets.chomp.downcase
@@ -141,6 +142,8 @@ class NotableBooks2018::CLI
         see_more_books_by_genre?
       when "list"
         view_books_by_genre
+      when "number"
+        view_books_by_list
       when "exit"
         goodbye
     end
