@@ -3,7 +3,7 @@ class NotableBooks2018::CLI
   def run
     NotableBooks2018::Scraper.scrape_book_info
     welcome
-    view_books_by_list
+    #view_books_by_list
     goodbye
   end
 
@@ -26,12 +26,22 @@ class NotableBooks2018::CLI
 
     input = gets.chomp.to_i
     if input == 1
-      puts "Testing functionality."
+      view_books_by_genre
     elsif input == 2
       view_books_by_list
     else
       puts "That is not a valid selection."
       first_choice
+    end
+  end
+
+  def view_books_by_genre
+    list_genres
+  end
+
+  def list_genres
+    NotableBooks2018::Genre.all.each do |genre|
+      puts genre.name
     end
   end
 
@@ -56,9 +66,6 @@ class NotableBooks2018::CLI
       puts ""
   end
 
-  def view_books_by_genre
-  end
-
   def display_list
     puts <<~DOC
 
@@ -78,11 +85,14 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number
+    # ADD HERE an option to instead view books by genre.
     puts "\nEnter the number of a book you would like more information about or enter 'exit' to quit."
     second_input = gets.chomp
 
     if ((@first_input.to_i)..((@first_input.to_i)+9)).include?(second_input.to_i)
       print_book_info(second_input.to_i)
+    #elsif second_input == "genre"
+      #call view_books_by_genre sequence
     elsif second_input.downcase == "exit"
       goodbye
     else
@@ -94,6 +104,7 @@ class NotableBooks2018::CLI
   end
 
     def see_more_books?
+      # ADD, or enter "main" to return to the main menu.
       puts "\nWould you like to see another book? Enter 'Yes' or 'No'."
 
       input = gets.chomp.downcase
@@ -101,6 +112,8 @@ class NotableBooks2018::CLI
       case input
         when "yes"
           view_books_by_list
+        #when "main"
+          #choose_display
         when "no"
           goodbye
          else
@@ -127,9 +140,6 @@ class NotableBooks2018::CLI
     end
   end
 
-
-
-
   def print_book_info(book_index)
     NotableBooks2018::Book.all.each.with_index(1) do |book, index|
       if index == book_index
@@ -146,7 +156,6 @@ class NotableBooks2018::CLI
       end
     end
   end
-
 
   def goodbye
     puts "\nThank you for browsing. Goodbye!"
