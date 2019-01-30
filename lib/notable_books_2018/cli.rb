@@ -7,11 +7,13 @@ class NotableBooks2018::CLI
   end
 
   def welcome
+    puts "\n--------------------------------------------"
     puts Paint["\nWelcome to Notable Books of 2018!", :bright]
-    puts "-------------------------------------------"
+    puts "\n--------------------------------------------"
     puts <<~DOC
+
       The New York Times Book Review published a list of notable new book releases in 2018.
-      You can use this gem to browse 2018's notable book selections and find more information about each book.
+      You can use this gem to browse 2018's book selections and find more information about each book.
 
       You can view books by genre or view books by numbered list.
     DOC
@@ -45,7 +47,9 @@ class NotableBooks2018::CLI
   end
 
   def list_genres
-    puts "\nDisplaying All Genres"
+    puts "\n--------------------------------------------"
+    puts Paint["Displaying All Genres", :bright]
+    puts "--------------------------------------------"
     puts "\n"
     # could alphabetize genre names with: NotableBooks2018::Genre.all.sort_by{|genre| genre.name}.each do..
     @all_genre_names = []
@@ -56,7 +60,7 @@ class NotableBooks2018::CLI
   end
 
   def choose_genre
-    puts "\nEnter a #{Paint["genre name", :magenta]} to browse its books."
+    puts "\nEnter a #{Paint["genre name", :magenta]} to browse books by genre."
     puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
 
     @genre_name = gets.chomp.downcase
@@ -74,8 +78,9 @@ class NotableBooks2018::CLI
   end
 
   def display_books_by_genre(genre_name)
-    #this capitalization works for all but "Comics/graphics."
-    puts "\nViewing The #{genre_name.split.map(&:capitalize!).join(" ")} Genre"
+    puts "\n--------------------------------------------"
+    puts Paint["Viewing: #{genre_name.split.map(&:capitalize!).join(" ")}", :bright]
+    puts "--------------------------------------------"
     puts ""
 
     @indices_from_genre = []
@@ -113,15 +118,16 @@ class NotableBooks2018::CLI
       if @genre_name == genre_instance.name.downcase
         genre_instance.books.each.with_index(1) do |book, index|
           if book_index == index
-            puts ""
-            puts book.title
+            puts "\n--------------------------------------------"
+            puts Paint["#{book.title}", :bright]
             puts "by #{book.author}"
-            puts ""
-            puts "Genre(s):"
+            puts "--------------------------------------------"
+            puts Paint["\nGenre(s):", :bright]
               book.genre.collect do |genre|
-                puts genre.name
+                puts "#{genre.name}"
               end
-            puts "\nDescription: #{book.description}"
+            puts Paint["\nDescription:",:bright]
+            puts book.description
             puts ""
           end
         end
