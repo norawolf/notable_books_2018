@@ -208,10 +208,29 @@ class NotableBooks2018::CLI
     puts ""
   end
 
+def print_book_list(by_number)
+    if by_number == 100
+      puts "\n--------------------------------------------"
+      puts "#{Paint["Displaying The 100th Notable Book", :bright]}"
+      puts "--------------------------------------------"
+    elsif by_number >= 92 && by_number != 100
+      puts "\n--------------------------------------------"
+      puts "#{Paint["Displaying Notable Books #{by_number} - 100", :bright]}"
+      "--------------------------------------------"
+    else
+      puts "\n--------------------------------------------"
+      puts "#{Paint["Displaying Notable Books #{by_number} - #{by_number+9}", :bright]}"
+      puts "--------------------------------------------"
+      puts ""
+    end
+
+  NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
+    puts "#{index}. #{book.title} by #{book.author}"
+  end
+end
 
 
   def select_book_by_number
-    # ADD HERE an option to return to main menu
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like more information about."
     puts "Enter #{Paint["'list'", :magenta]} to return to the book list or #{Paint["'exit'", :magenta]} to quit."
     second_input = gets.chomp
@@ -226,8 +245,24 @@ class NotableBooks2018::CLI
       puts "\nPlease enter a number #{@number_input.to_i}-#{(@number_input.to_i)+9} to get book information."
       select_book_by_number
     end
+  end
 
-    #see_more_books?
+  def print_book_info(book_index)
+    NotableBooks2018::Book.all.each.with_index(1) do |book, index|
+      if index == book_index
+        puts "\n--------------------------------------------"
+        puts Paint["#{book.title}", :bright]
+        puts "by #{book.author}"
+        puts "--------------------------------------------"
+        puts Paint["\nGenre(s):", :bright]
+          book.genre.collect do |genre|
+            puts "#{genre.name}"
+          end
+        puts Paint["\nDescription:",:bright]
+        puts book.description
+        puts ""
+      end
+    end
   end
 
     def see_more_books?
@@ -252,45 +287,6 @@ class NotableBooks2018::CLI
           see_more_books?
       end
     end
-
-    def print_book_list(by_number)
-      if by_number == 100
-        puts "\n--------------------------------------------"
-        puts "#{Paint["Displaying The 100th Notable Book", :bright]}"
-        puts "--------------------------------------------"
-      elsif by_number >= 92 && by_number != 100
-        puts "\n--------------------------------------------"
-        puts "#{Paint["Displaying Notable Books #{by_number} - 100", :bright]}"
-        "--------------------------------------------"
-      else
-        puts "\n--------------------------------------------"
-        puts "#{Paint["Displaying Notable Books #{by_number} - #{by_number+9}", :bright]}"
-        puts "--------------------------------------------"
-        puts ""
-      end
-
-    NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
-      puts "#{index}. #{book.title} by #{book.author}"
-    end
-  end
-
-  def print_book_info(book_index)
-    NotableBooks2018::Book.all.each.with_index(1) do |book, index|
-      if index == book_index
-        puts "\n--------------------------------------------"
-        puts Paint["#{book.title}", :bright]
-        puts "by #{book.author}"
-        puts "--------------------------------------------"
-        puts Paint["\nGenre(s):", :bright]
-          book.genre.collect do |genre|
-            puts "#{genre.name}"
-          end
-        puts Paint["\nDescription:",:bright]
-        puts book.description
-        puts ""
-      end
-    end
-  end
 
   def goodbye
     puts "\nThank you for browsing Notable Books 2018. Happy reading!"
