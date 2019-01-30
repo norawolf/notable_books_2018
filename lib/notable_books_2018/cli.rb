@@ -30,7 +30,7 @@ class NotableBooks2018::CLI
     if input.to_i == 1
       view_books_by_genre
     elsif input.to_i == 2
-      view_books_by_list
+      choose_books_by_num
     elsif input == "exit"
       goodbye
     else
@@ -155,7 +155,7 @@ class NotableBooks2018::CLI
       when "list"
         view_books_by_genre
       when "number"
-        view_books_by_list
+        choose_books_by_num
       when "exit"
         goodbye
       else
@@ -184,7 +184,7 @@ class NotableBooks2018::CLI
     DOC
   end
 
-  def view_books_by_list
+  def choose_books_by_num
     display_number_groups
     @number_input = nil
 
@@ -203,7 +203,7 @@ class NotableBooks2018::CLI
       goodbye
     else
       puts "\nThat is not a valid selection."
-      view_books_by_list
+      choose_books_by_num
     end
     puts ""
   end
@@ -219,7 +219,7 @@ class NotableBooks2018::CLI
     if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
       print_book_info(second_input.to_i)
     elsif second_input == "list"
-      view_books_by_list
+      choose_books_by_num
     elsif second_input.downcase == "exit"
       goodbye
     else
@@ -242,7 +242,7 @@ class NotableBooks2018::CLI
 
       case input
         when "yes"
-          view_books_by_list
+          choose_books_by_num
         when "genre"
           view_books_by_genre
         when "exit"
