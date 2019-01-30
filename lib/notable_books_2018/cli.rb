@@ -42,10 +42,10 @@ class NotableBooks2018::CLI
   end
 
   def list_genres
-    @all_genre_names = []
     puts "\nDisplaying All Genres"
     puts "\n"
     # could alphabetize genre names with: NotableBooks2018::Genre.all.sort_by{|genre| genre.name}.each do..
+    @all_genre_names = []
     NotableBooks2018::Genre.all.collect do |genre|
       puts genre.name
       @all_genre_names << genre.name.downcase
@@ -53,9 +53,8 @@ class NotableBooks2018::CLI
   end
 
   def choose_genre
-    puts "\nPlease enter a genre name to browse its books."
-    puts "\nEnter 'main' to return to the main menu"
-    puts "Or, enter 'exit' to quit."
+    puts "\nEnter a genre name to browse its books."
+    puts "Enter 'main' to return to the main menu or enter 'exit' to quit."
 
     @genre_name = gets.chomp.downcase
 
@@ -73,23 +72,37 @@ class NotableBooks2018::CLI
 
   def display_books_by_genre(genre_name)
     #this capitalization works for all but "Comics/graphics."
-    puts "\nViewing all #{genre_name.split.map(&:capitalize!).join(" ")} books."
+    puts "\nViewing All #{genre_name.split.map(&:capitalize!).join(" ")} Books"
     puts ""
+
+    @indices_from_genre = []
     NotableBooks2018::Genre.all.each do |genre|
       if genre_name == genre.name.downcase
         genre.books.each.with_index(1) do |book, index|
           puts "#{index}. #{book.title} by #{book.author}"
+          @indices_from_genre << index.to_i
         end
       end
     end
   end
 
   def select_book_by_number_through_genre
-    puts "\nPlease enter the number of a book you would like to read more about."
+    puts "\nEnter the number of a book you would like to read more about."
+    puts "Or, you can enter 'list' to return the genre list or 'exit' to quit."
 
-    @book_index_from_genre = gets.chomp.to_i
+    @book_index_from_genre = gets.chomp
 
-    print_book_info_from_genre(@book_index_from_genre)
+    if @indices_from_genre.include?(@book_index_from_genre.to_i)
+      print_book_info_from_genre(@book_index_from_genre.to_i)
+    elsif @book_index_from_genre == "list"
+      view_books_by_genre
+    elsif @book_index_from_genre == "exit"
+      goodbye
+    else
+      puts "\nPlease enter a number between #{@indices_from_genre.first}-"\
+      "#{@indices_from_genre.last}."
+      select_book_by_number_through_genre
+    end
   end
 
   def print_book_info_from_genre(book_index)
