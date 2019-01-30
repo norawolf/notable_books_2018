@@ -160,17 +160,20 @@ class NotableBooks2018::CLI
     @number_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
-      puts "\nPlease enter a number to see a list of books or enter 'exit' to quit."
+      puts "\nPlease enter a number to see a list of books."
+      puts "You can enter 'main' to return to the main menu or 'exit' to quit."
       @number_input = gets.chomp
 
       if (1..100).include?(@number_input.to_i)
         print_book_list(@number_input.to_i)
         select_book_by_number
         see_more_books?
+      elsif @number_input.downcase == "main"
+        welcome
       elsif @number_input.downcase == "exit"
         goodbye
       else
-        puts "That is not a valid selection."
+        puts "\nThat is not a valid selection."
         view_books_by_list
       end
       puts ""
