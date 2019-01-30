@@ -164,31 +164,7 @@ class NotableBooks2018::CLI
     end
   end
 
-  def view_books_by_list
-    display_list
-    @number_input = nil
-    # also can use ||=, maybe
-    # if input is equal to nil, run this block of code
-      puts "\nPlease enter a #{Paint["number", :magenta]} to see a list of books."
-      puts "You can enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
-      @number_input = gets.chomp
-
-      if (1..100).include?(@number_input.to_i)
-        print_book_list(@number_input.to_i)
-        select_book_by_number
-        see_more_books?
-      elsif @number_input.downcase == "main"
-        welcome
-      elsif @number_input.downcase == "exit"
-        goodbye
-      else
-        puts "\nThat is not a valid selection."
-        view_books_by_list
-      end
-      puts ""
-  end
-
-  def display_list
+  def display_number_groups
     puts <<~DOC
 
       --------------------------------------------
@@ -207,6 +183,32 @@ class NotableBooks2018::CLI
 
     DOC
   end
+
+  def view_books_by_list
+    display_number_groups
+    @number_input = nil
+
+    puts "\nPlease enter a #{Paint["number", :magenta]} to see a list of books."
+    puts "You can enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
+
+    @number_input = gets.chomp
+
+    if (1..100).include?(@number_input.to_i)
+      print_book_list(@number_input.to_i)
+      select_book_by_number
+      see_more_books?
+    elsif @number_input.downcase == "main"
+      welcome
+    elsif @number_input.downcase == "exit"
+      goodbye
+    else
+      puts "\nThat is not a valid selection."
+      view_books_by_list
+    end
+    puts ""
+  end
+
+
 
   def select_book_by_number
     # ADD HERE an option to return to main menu
