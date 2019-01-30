@@ -3,7 +3,7 @@ class NotableBooks2018::CLI
   def run
     NotableBooks2018::Scraper.scrape_book_info
     welcome
-    select_book_list
+    select_book_by_list
     goodbye
   end
 
@@ -13,7 +13,48 @@ class NotableBooks2018::CLI
     puts <<~DOC
       The New York Times Book Review published a list of notable new book releases in 2018.
       You can use this gem to browse 2018's notable book selections and find more information about each book.
+
+      You can view books by genre or view books by numbered list.
+
     DOC
+
+    choose_display
+  end
+
+  def choose_display
+    puts "Enter 1 to view books by genre -or-"
+    puts "Enter 2 to view books by numbered list."
+
+    input = gets.chomp.to_i
+    if input == 1
+      puts "Testing functionality."
+    elsif input == 2
+      select_book_by_list
+    else
+      puts "That is not a valid selection."
+      first_choice
+    end
+  end
+
+  def select_book_by_list
+    display_list
+    @first_input = nil
+    # also can use ||=, maybe
+    # if input is equal to nil, run this block of code
+      puts "Please enter a number to see a list of books or enter 'exit' to quit."
+      @first_input = gets.chomp
+
+      if (1..100).include?(@first_input.to_i)
+        print_book_list(@first_input.to_i)
+        select_book_by_list
+        see_more_books?
+      elsif @first_input.downcase == "exit"
+        goodbye
+      else
+        puts "That is not a valid selection."
+        select_book_list
+      end
+      puts ""
   end
 
   def display_list
@@ -32,27 +73,6 @@ class NotableBooks2018::CLI
         91-100
 
     DOC
-  end
-
-  def select_book_list
-    display_list
-    @first_input = nil
-    # also can use ||=, maybe
-    # if input is equal to nil, run this block of code
-      puts "Please enter a number to see a list of books or enter 'exit' to quit."
-      @first_input = gets.chomp
-
-      if (1..100).include?(@first_input.to_i)
-        print_book_list(@first_input.to_i)
-        select_book_by_number
-        see_more_books?
-      elsif @first_input.downcase == "exit"
-        goodbye
-      else
-        puts "That is not a valid selection."
-        select_book_list
-      end
-      puts ""
   end
 
   def select_book_by_number
@@ -121,7 +141,6 @@ class NotableBooks2018::CLI
           end
         puts "\nDescription: #{book.description}"
         puts ""
-        #How to display book description with auto line wrapping? Or is it just my terminal
       end
     end
   end
