@@ -37,27 +37,47 @@ class NotableBooks2018::CLI
 
   def view_books_by_genre
     list_genres
+    choose_genre
+    display_books_by_genre #comment out after pry
   end
 
   def list_genres
+    puts "\nDisplaying All Genres"
+    puts "\n"
     NotableBooks2018::Genre.all.each do |genre|
       puts genre.name
     end
   end
 
+  def choose_genre
+    puts "\nPlease enter the name of the genre's books you would like to browse."
+
+    @genre_input = gets.chomp.downcase
+  end
+
+  def display_books_by_genre
+    NotableBooks2018::Genre.all.each do |genre|
+      if @genre_input == genre.name.downcase
+        genre.books.each.with_index(1) do |book, index|
+          puts "#{index}. #{book.title} by #{book.author}"
+        end
+      end
+    end
+  end
+
   def view_books_by_list
     display_list
-    @first_input = nil
+    @number_input = nil
     # also can use ||=, maybe
     # if input is equal to nil, run this block of code
       puts "\nPlease enter a number to see a list of books or enter 'exit' to quit."
-      @first_input = gets.chomp
+      @number_input = gets.chomp
 
-      if (1..100).include?(@first_input.to_i)
-        print_book_list(@first_input.to_i)
+      if (1..100).include?(@number_input.to_i)
+        print_book_list(@number_input.to_i)
         select_book_by_number
         see_more_books?
-      elsif @first_input.downcase == "exit"
+      elsif @number_input.downcase == "exit"
         goodbye
       else
         puts "That is not a valid selection."
@@ -89,14 +109,14 @@ class NotableBooks2018::CLI
     puts "\nEnter the number of a book you would like more information about or enter 'exit' to quit."
     second_input = gets.chomp
 
-    if ((@first_input.to_i)..((@first_input.to_i)+9)).include?(second_input.to_i)
+    if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
       print_book_info(second_input.to_i)
     #elsif second_input == "genre"
       #call view_books_by_genre sequence
     elsif second_input.downcase == "exit"
       goodbye
     else
-      puts "\nPlease enter a number #{@first_input.to_i}-#{(@first_input.to_i)+9} to get book information."
+      puts "\nPlease enter a number #{@number_input.to_i}-#{(@number_input.to_i)+9} to get book information."
       select_book_by_number
     end
 
