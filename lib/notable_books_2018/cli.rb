@@ -54,15 +54,15 @@ class NotableBooks2018::CLI
   def choose_genre
     puts "\nPlease enter the name of the genre's books you would like to browse."
 
-    @genre_input = gets.chomp.downcase
+    @genre_name = gets.chomp.downcase
   end
 
   def display_books_by_genre
-    #this capitalization works for all but "Comics/graphics"
-    puts "\nViewing all #{@genre_input.split.map(&:capitalize!).join(" ")} books."
+    #this capitalization works for all but "Comics/graphics."
+    puts "\nViewing all #{@genre_name.split.map(&:capitalize!).join(" ")} books."
     puts ""
     NotableBooks2018::Genre.all.each do |genre|
-      if @genre_input == genre.name.downcase
+      if @genre_name == genre.name.downcase
         genre.books.each.with_index(1) do |book, index|
           puts "#{index}. #{book.title} by #{book.author}"
         end
@@ -72,10 +72,30 @@ class NotableBooks2018::CLI
 
   def select_book_by_number_through_genre
     puts "\n Please enter the number of a book you would like to read more about."
+
+    @book_index_from_genre = gets.chomp.to_i
+
+    print_book_info_from_genre(@book_index_from_genre)
   end
 
   def print_book_info_from_genre(book_index)
-    NotableBooks2018::Genre.all.each do |genre|
+    NotableBooks2018::Genre.all.each do |genre_instance|
+      if @genre_name == genre_instance.name.downcase
+        genre_instance.books.each.with_index(1) do |book, index|
+          if book_index == index
+            puts ""
+            puts book.title
+            puts "by #{book.author}"
+            puts ""
+            puts "Genre(s):"
+              book.genre.collect do |genre|
+                puts genre.name
+              end
+            puts "\nDescription: #{book.description}"
+            puts ""
+          end
+        end
+      end
     end
   end
 
