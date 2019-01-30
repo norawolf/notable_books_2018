@@ -5,7 +5,7 @@ class NotableBooks2018::Scraper
     Nokogiri::HTML(open("https://www.nytimes.com/interactive/2018/11/19/books/review/100-notable-books.html"))
   end
 
-  def self.genre_parse(css)
+  def self.create_genres(css)
     genre_data = css
 
     genre_data.collect do |genre_name| #this is the (1-3) strings inside of the hash[:genre] array
@@ -21,8 +21,7 @@ class NotableBooks2018::Scraper
        book_hash = {}
        book_hash[:title] = nodeset.css(".g-book-title").text.strip
        book_hash[:author] = nodeset.css(".g-book-author b").text.strip.chomp(".")
-       # !! NEED to fix parsing for genres! Currnetly, "Foreign Affairs" and "Current Affairs" aren't working
-       book_hash[:genre] = genre_parse(nodeset.css(".g-book-tag").text.split)
+       book_hash[:genre] = create_genres(nodeset.css(".g-book-tag").text.split(".").map!(&:strip).reject(&:empty?))
        book_hash[:description] = nodeset.css(".g-book-description").text.strip
       books_array << book_hash
       end
