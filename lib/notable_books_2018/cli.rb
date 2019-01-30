@@ -20,7 +20,7 @@ class NotableBooks2018::CLI
   end
 
   def choose_display
-    puts "\nEnter 1 to view books by genre -or-"
+    puts "\nEnter 1 to view books by genre, or"
     puts "Enter 2 to view books by numbered list."
 
     input = gets.chomp.to_i
@@ -54,7 +54,7 @@ class NotableBooks2018::CLI
 
   def choose_genre
     puts "\nEnter a genre name to browse its books."
-    puts "Enter 'main' to return to the main menu or enter 'exit' to quit."
+    puts "Enter 'main' to return to the main menu or 'exit' to quit."
 
     @genre_name = gets.chomp.downcase
 
@@ -127,10 +127,13 @@ class NotableBooks2018::CLI
   end
 
   def see_more_books_by_genre?
-    puts "Would you like to see another book? Enter 'Yes' to return to your chosen genre's books."
-    puts "You can enter 'list' to return to all genres."
-    puts "You can enter 'number' to switch to browsing books by number."
-    puts "Or type 'exit' to quit."
+    puts <<~DOC
+      Would you like to see another book?
+        Enter 'Yes' to return to your chosen genre's books.
+        You can enter 'list' to return to all genres.
+        You can enter 'number' to switch to browsing books by number.
+        Or enter 'exit' to quit.
+    DOC
 
     input = gets.chomp.downcase
 
@@ -146,6 +149,9 @@ class NotableBooks2018::CLI
         view_books_by_list
       when "exit"
         goodbye
+      else
+        puts "That is not a valid selction."
+        see_more_books_by_genre?
     end
   end
 
@@ -189,7 +195,7 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number
-    # ADD HERE an option to instead view books by genre.
+    # ADD HERE an option to return to main menu
     puts "\nEnter the number of a book you would like more information about or enter 'exit' to quit."
     second_input = gets.chomp
 
@@ -209,20 +215,25 @@ class NotableBooks2018::CLI
 
     def see_more_books?
       # ADD, or enter "main" to return to the main menu.
-      puts "\nWould you like to see another book? Enter 'Yes' or 'No'."
-
+      puts <<~DOC
+        Would you like to see another book?
+          Enter 'yes' to return to the book list.
+          You can enter 'genre' to switch to browsing books by genre.
+          Or enter 'exit' to quit.
+      DOC
+      
       input = gets.chomp.downcase
 
       case input
         when "yes"
           view_books_by_list
-        #when "main"
-          #choose_display
-        when "no"
+        when "genre"
+          view_books_by_genre
+        when "exit"
           goodbye
          else
-          puts "That is not a valid selection."
-          view_books_by_list
+          puts "\nThat is not a valid selection."
+          see_more_books?
       end
     end
 
