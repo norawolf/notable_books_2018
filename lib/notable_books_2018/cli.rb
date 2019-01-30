@@ -20,7 +20,7 @@ class NotableBooks2018::CLI
   end
 
   def choose_display
-    puts "Enter 1 to view books by genre -or-"
+    puts "\nEnter 1 to view books by genre -or-"
     puts "Enter 2 to view books by numbered list."
 
     input = gets.chomp.to_i
@@ -53,13 +53,16 @@ class NotableBooks2018::CLI
   end
 
   def choose_genre
-    puts "\nPlease enter the name of the genre's books you would like to browse."
-    puts "Or, type 'exit' to quit."
+    puts "\nPlease enter a genre name to browse its books."
+    puts "\nEnter 'main' to return to the main menu"
+    puts "Or, enter 'exit' to quit."
 
     @genre_name = gets.chomp.downcase
 
     if @all_genre_names.include?(@genre_name)
       display_books_by_genre(@genre_name)
+    elsif @genre_name == "main"
+      welcome
     elsif @genre_name == "exit"
       goodbye
     else
