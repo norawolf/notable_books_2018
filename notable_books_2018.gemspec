@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["norawolf"]
   spec.email         = ["noraevogt@gmail.com"]
 
-  spec.summary       = %q{Summary TBD}
+  spec.summary       = %q{Notable Books 2018 is a gem to browse the New York Times' best books of 2018 list.}
   spec.description   = %q{Write a longer description or delete this line.}
-  #spec.homepage      = "Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/norawolf/notable_books_2018"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -42,4 +42,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
 
   spec.add_dependency "nokogiri"
+  spec.add_dependency "paint"
 end
