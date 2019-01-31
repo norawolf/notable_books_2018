@@ -251,7 +251,8 @@ class NotableBooks2018::CLI
     puts Paint["#{book.title}", :bright]
     puts "by #{book.author}"
     puts "--------------------------------------------"
-    puts "#{Paint["\nPublication Details:", :bright]} #{book.publication_info}"
+    puts "#{Paint["\nPublisher:", :bright]} #{book.publisher}"
+    puts "#{Paint["Details:", :bright]} #{book.other_info}"
     if book.genre.length == 1
       puts Paint["\nGenre:", :bright]
     else
