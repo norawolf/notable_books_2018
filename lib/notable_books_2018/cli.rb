@@ -43,7 +43,7 @@ class NotableBooks2018::CLI
     list_genres
     choose_genre
     select_book_by_number_through_genre
-    see_more_books_by_genre?
+    see_more_books_by_genre
   end
 
   def list_genres
@@ -135,7 +135,7 @@ class NotableBooks2018::CLI
     end
   end
 
-  def see_more_books_by_genre?
+  def see_more_books_by_genre
     puts <<~DOC
       Would you like to see another book?
         Enter #{Paint["'yes'", :magenta]} to return to your chosen genre's books.
@@ -151,7 +151,7 @@ class NotableBooks2018::CLI
         display_books_by_genre(@genre_name)
         select_book_by_number_through_genre
         print_book_info_from_genre(@book_index_from_genre)
-        see_more_books_by_genre?
+        see_more_books_by_genre
       when "list"
         view_books_by_genre
       when "number"
@@ -160,7 +160,7 @@ class NotableBooks2018::CLI
         goodbye
       else
         puts "That is not a valid selction."
-        see_more_books_by_genre?
+        see_more_books_by_genre
     end
   end
 
@@ -196,7 +196,7 @@ class NotableBooks2018::CLI
     if (1..100).include?(@number_input.to_i)
       print_book_list(@number_input.to_i)
       select_book_by_number
-      see_more_books?
+      see_more_books
     elsif @number_input.downcase == "main"
       welcome
     elsif @number_input.downcase == "exit"
@@ -265,7 +265,7 @@ class NotableBooks2018::CLI
     end
   end
 
-  def see_more_books?
+  def see_more_books
     puts <<~DOC
       Would you like to see another book?
         Enter #{Paint["'yes'", :magenta]} to return to the book list.
@@ -284,7 +284,7 @@ class NotableBooks2018::CLI
           goodbye
          else
           puts "\nThat is not a valid selection."
-          see_more_books?
+          see_more_books
       end
     end
 
