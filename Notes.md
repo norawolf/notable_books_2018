@@ -2,17 +2,15 @@ TO DO NEXT:
 
 - Fill out gemspec and Readme
 - text wrap paragraph desc to 80 characters?
-- Scraping for Review URL! -- Need help!
 - Blog Post
-- Recording: 30 Mins
 - Recording: 5 Min Walkthrough
 
 - Formatting. Final proof text outputs.
-- both print_book_info
-  and print_book_info_from_genre inside the final iteration outputs the same info.
-   - extract this to a helper method!
 
--Assessment - Keep In Mind
+- could not figure out:
+  - Scraping for Review URL
+  
+- Assessment - Keep In Mind
   - line by line explanation
   - how everything is connected
   - require vs. require_relative
@@ -29,10 +27,6 @@ TO DO NEXT:
 #   binding.pry
 #   new_book = NotableBooks2018::Book.new(title, author, genre, description)
 # end
-
-if nodeset.css(".g-book-title.balance-text a")
-  book_hash[:review_url] = nodeset.css(".g-book-title.balance-text a")[index]["href"]
-end
 
  to avoid over-scraping
  use ||=
