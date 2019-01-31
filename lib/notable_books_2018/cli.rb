@@ -251,10 +251,14 @@ class NotableBooks2018::CLI
     puts "by #{book.author}"
     puts "--------------------------------------------"
     puts "#{Paint["\nPublication Details:", :bright]} #{book.publication_info}"
-    puts Paint["\nGenre(s):", :bright]
-      book.genre.collect do |genre|
-        puts "#{genre.name}"
-      end
+    if book.genre.length == 1
+      puts Paint["\nGenre:", :bright]
+    else
+      puts Paint["\nGenres:", :bright]
+    end
+    book.genre.collect do |genre|
+      puts "#{genre.name}"
+    end
     puts Paint["\nDescription:",:bright]
     puts book.description
     puts ""
