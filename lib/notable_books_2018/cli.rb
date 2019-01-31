@@ -274,15 +274,20 @@ class NotableBooks2018::CLI
     puts <<~DOC
 
       Would you like to see another book?
-        Enter #{Paint["'yes'", :magenta]} to return to the book list.
-        You can enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
-        Or enter #{Paint["'exit'", :magenta]} to quit.
+        Enter #{Paint["'back'", :magenta]} to return to your selected list.
+        Enter #{Paint["'list'", :magenta]} to return to the main list of books by number.
+        Enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
+        Or, enter #{Paint["'exit'", :magenta]} to quit.
     DOC
 
     input = gets.chomp.downcase
 
     case input
-      when "yes"
+    when "back"
+        print_book_list(@number_input.to_i)
+        select_book_by_number
+        see_more_books
+      when "list"
         choose_books_by_num
       when "genre"
         view_books_by_genre
