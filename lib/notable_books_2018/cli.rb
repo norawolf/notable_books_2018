@@ -118,17 +118,7 @@ class NotableBooks2018::CLI
       if @genre_name == genre_instance.name.downcase
         genre_instance.books.each.with_index(1) do |book, index|
           if book_index == index
-            puts "\n--------------------------------------------"
-            puts Paint["#{book.title}", :bright]
-            puts "by #{book.author}"
-            puts "--------------------------------------------"
-            puts Paint["\nGenre(s):", :bright]
-              book.genre.collect do |genre|
-                puts "#{genre.name}"
-              end
-            puts Paint["\nDescription:",:bright]
-            puts book.description
-            puts ""
+            book_info_contents(book)
           end
         end
       end
@@ -250,19 +240,23 @@ class NotableBooks2018::CLI
   def print_book_info(book_index)
     NotableBooks2018::Book.all.each.with_index(1) do |book, index|
       if index == book_index
-        puts "\n--------------------------------------------"
-        puts Paint["#{book.title}", :bright]
-        puts "by #{book.author}"
-        puts "--------------------------------------------"
-        puts Paint["\nGenre(s):", :bright]
-          book.genre.collect do |genre|
-            puts "#{genre.name}"
-          end
-        puts Paint["\nDescription:",:bright]
-        puts book.description
-        puts ""
+        book_info_contents(book)
       end
     end
+  end
+
+  def book_info_contents(book)
+    puts "\n--------------------------------------------"
+    puts Paint["#{book.title}", :bright]
+    puts "by #{book.author}"
+    puts "--------------------------------------------"
+    puts Paint["\nGenre(s):", :bright]
+      book.genre.collect do |genre|
+        puts "#{genre.name}"
+      end
+    puts Paint["\nDescription:",:bright]
+    puts book.description
+    puts ""
   end
 
   def see_more_books
@@ -273,20 +267,20 @@ class NotableBooks2018::CLI
         Or enter #{Paint["'exit'", :magenta]} to quit.
     DOC
 
-      input = gets.chomp.downcase
+    input = gets.chomp.downcase
 
-      case input
-        when "yes"
-          choose_books_by_num
-        when "genre"
-          view_books_by_genre
-        when "exit"
-          goodbye
-         else
-          puts "\nThat is not a valid selection."
-          see_more_books
-      end
+    case input
+      when "yes"
+        choose_books_by_num
+      when "genre"
+        view_books_by_genre
+      when "exit"
+        goodbye
+      else
+        puts "\nThat is not a valid selection."
+        see_more_books
     end
+  end
 
   def goodbye
     puts "\nThank you for browsing Notable Books 2018. Happy reading!"
