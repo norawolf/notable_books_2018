@@ -260,8 +260,12 @@ class NotableBooks2018::CLI
       puts "#{genre.name}"
     end
     puts Paint["\nDescription:",:bright]
-    puts book.description
+    puts "#{wrap_text(book.description)}"
     puts ""
+  end
+
+  def wrap_text(txt, col = 80)
+    txt.gsub(/(.{1,#{col}})( +|$\n?)|(.{1,#{col}})/, "\\1\\3\n")
   end
 
   def see_more_books
