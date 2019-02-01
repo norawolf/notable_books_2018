@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{A gem to browse the New York Times' Notable Books of 2018 list.}
   spec.homepage      = "https://github.com/norawolf/notable_books_2018.git"
   spec.license       = "MIT"
+  spec.required_ruby_version = '~> 2.0'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -35,9 +36,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "pry"
 
-  spec.add_dependency "nokogiri"
-  spec.add_dependency "paint"
+  spec.add_dependency "nokogiri", "~> 1.0"
+  spec.add_dependency "paint", "~> 2.0"
 end
