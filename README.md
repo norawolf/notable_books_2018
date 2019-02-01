@@ -1,8 +1,6 @@
 # NotableBooks2018
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/notable_books_2018`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to Notable Books 2018! This gem is a CLI application that utilizes data from the New York Times Book Review's "100 Notable Books of 2018" list. You can browse books and find more information about your book selection. Happy reading!
 
 ## Installation
 
@@ -22,7 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run this gem by entering
+
+  $ notable_books_2018
+
+and follow the prompts to navigate the gem. 
 
 ## Development
 
