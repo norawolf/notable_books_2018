@@ -3,6 +3,7 @@ PATH
   specs:
     notable_books_2018 (0.1.0)
       nokogiri
+      paint
 
 GEM
   remote: https://rubygems.org/
@@ -13,6 +14,7 @@ GEM
     mini_portile2 (2.4.0)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    paint (2.1.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
