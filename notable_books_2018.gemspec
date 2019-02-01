@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = NotableBooks2018::VERSION
   spec.authors       = ["norawolf"]
   spec.email         = ["noraevogt@gmail.com"]
-
+  spec.files         = ["lib/environment.rb", "lib/notable_books_2018/book.rb", "lib/notable_books_2018/cli.rb", "lib/notable_books_2018/genre.rb", "lib/notable_books_2018/scraper.rb", "lib/notable_books_2018/version.rb", "bin/setup", "bin/notable-books-2018"]
   spec.summary       = %q{A gem to browse the New York Times' Notable Books of 2018 list.}
   spec.homepage      = "https://github.com/norawolf/notable_books_2018"
   spec.license       = "MIT"
