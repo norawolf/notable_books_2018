@@ -18,9 +18,6 @@ class NotableBooks2018::Book
 
   def genre=(genre)
     @genre = genre
-    #genre is an array of 1 or 2 or 3 instances
-    # for each instance in the genre array (Fiction, Poetry, etc)
-    # associate this Book instance being created to that genre
     genre.each do |genre_instance|
       genre_instance.books << self
     end
@@ -31,6 +28,5 @@ class NotableBooks2018::Book
       NotableBooks2018::Book.new(book_hash)
     end
   end
-
 
 end
