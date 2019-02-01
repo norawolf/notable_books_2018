@@ -32,7 +32,7 @@ class NotableBooks2018::CLI
     if input.to_i == 1
       view_books_by_genre
     elsif input.to_i == 2
-      choose_books_by_num
+      view_books_by_num
     elsif input == "exit"
       goodbye
     else
@@ -53,7 +53,7 @@ class NotableBooks2018::CLI
     puts Paint["Displaying All Genres", :bright]
     puts "--------------------------------------------"
     puts "\n"
-    # could alphabetize genre names with: NotableBooks2018::Genre.all.sort_by{|genre| genre.name}.each do..
+
     @all_genre_names = []
     NotableBooks2018::Genre.all.collect do |genre|
       puts genre.name
@@ -63,7 +63,8 @@ class NotableBooks2018::CLI
 
   def choose_genre
     puts "\nEnter a #{Paint["genre name", :magenta]} to browse books by genre."
-    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or "\
+      "#{Paint["'exit'", :magenta]} to quit."
 
     @genre_name = gets.chomp.downcase
 
@@ -81,7 +82,8 @@ class NotableBooks2018::CLI
 
   def display_books_by_genre(genre_name)
     puts "\n--------------------------------------------"
-    puts Paint["Viewing: #{genre_name.split.map(&:capitalize!).join(" ")}", :bright]
+    puts Paint["Viewing: #{genre_name.split.map(&:capitalize!).join(" ")}",
+      :bright]
     puts "--------------------------------------------"
     puts ""
 
@@ -99,7 +101,7 @@ class NotableBooks2018::CLI
   def select_book_by_number_through_genre
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "to read more about."
-    puts "Or, Enter #{Paint["'back'", :magenta]} to return the genre list or "\
+    puts "Or, enter #{Paint["'back'", :magenta]} to return the genre list or "\
       "#{Paint["'exit'", :magenta]} to quit."
 
     @book_index_from_genre = gets.chomp
@@ -150,13 +152,18 @@ class NotableBooks2018::CLI
       when "list"
         view_books_by_genre
       when "number"
-        choose_books_by_num
+        view_books_by_num
       when "exit"
         goodbye
       else
         puts "\nThat is not a valid selction."
         see_more_books_by_genre
     end
+  end
+
+  def view_books_by_num
+    display_number_groups
+    choose_books_by_num
   end
 
   def display_number_groups
@@ -180,7 +187,6 @@ class NotableBooks2018::CLI
   end
 
   def choose_books_by_num
-    display_number_groups
     @number_input = nil
 
     puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
@@ -215,13 +221,14 @@ class NotableBooks2018::CLI
       "--------------------------------------------"
     else
       puts "\n--------------------------------------------"
-      puts "#{Paint["Displaying Notable Books #{by_number} - #{by_number+9}", :bright]}"
+      puts "#{Paint["Displaying Notable Books #{by_number} - #{by_number+9}",
+        :bright]}"
       puts "--------------------------------------------"
       puts ""
     end
 
     NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
-      puts "#{index}. #{book.title} by #{book.author}"
+        puts "#{index}. #{book.title} by #{book.author}"
     end
   end
 
@@ -230,17 +237,17 @@ class NotableBooks2018::CLI
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "more information about."
     puts "Or, enter #{Paint["'back'", :magenta]} to return to the numbered "\
-      e"book list or #{Paint["'exit'", :magenta]} to quit."
+      "book list or #{Paint["'exit'", :magenta]} to quit."
     second_input = gets.chomp
 
     if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
       print_book_info(second_input.to_i)
     elsif second_input == "back"
-      choose_books_by_num
+      view_books_by_num
     elsif second_input.downcase == "exit"
       goodbye
     else
-      puts "\nPlease enter a number #{@number_input.to_i}-#{(@number_input.to_i)+9} to get book information."
+      puts "\nPlease enter a number #{@number_input.to_i}-#{(@number_input.to_i)+9}."
       select_book_by_number
     end
   end
@@ -295,7 +302,7 @@ class NotableBooks2018::CLI
         select_book_by_number
         see_more_books
       when "list"
-        choose_books_by_num
+        view_books_by_num
       when "genre"
         view_books_by_genre
       when "exit"
