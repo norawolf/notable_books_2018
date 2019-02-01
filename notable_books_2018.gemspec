@@ -6,7 +6,7 @@ require "notable_books_2018/version"
 Gem::Specification.new do |spec|
   spec.name          = "notable_books_2018"
   spec.version       = NotableBooks2018::VERSION
-  spec.authors       = ["norawolf"]
+  spec.authors       = ["Nora Vogt"]
   spec.email         = ["noraevogt@gmail.com"]
   spec.files         = Dir['lib/notable_books_2018/*.rb'] + Dir['bin/*'] + Dir['lib/environment.rb'] + Dir['[A-Z]*']
   spec.summary       = %q{A gem to browse the New York Times' Notable Books of 2018 list.}
