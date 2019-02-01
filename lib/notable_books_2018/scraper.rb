@@ -1,5 +1,3 @@
-require 'pry'
-
 class NotableBooks2018::Scraper
   def self.scrape_page
     url = "https://www.nytimes.com/interactive/2018/11/19/books/review/100-notable-books.html"
@@ -31,6 +29,6 @@ class NotableBooks2018::Scraper
     genre_data = css
     genre_data.collect do |genre_name|
       NotableBooks2018::Genre.find_or_create_by_name(genre_name)
-     end
+    end
   end
 end
