@@ -2,7 +2,7 @@ class NotableBooks2018::Book
 
   @@all = []
 
-  attr_accessor :title, :author, :description, :publisher, :other_info #:price #:review_url #:cover_url,
+  attr_accessor :title, :author, :description, :publisher, :price
   attr_reader :genre
 
   def self.all
