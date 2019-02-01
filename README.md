@@ -22,7 +22,9 @@ Or install it yourself as:
 
 Run this gem by entering
 
+```ruby
   $ notable_books_2018
+```
 
 and follow the prompts to navigate the gem.
 
