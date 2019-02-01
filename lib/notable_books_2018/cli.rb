@@ -8,7 +8,7 @@ class NotableBooks2018::CLI
 
   def welcome
     puts "\n--------------------------------------------"
-    puts Paint["Welcome to NYT's Notable Books of 2018!", :bright]
+    puts Paint["Welcome to Notable Books of 2018!", :bright]
     puts "--------------------------------------------"
     puts <<~DOC
 
@@ -133,7 +133,6 @@ class NotableBooks2018::CLI
 
   def see_more_books_by_genre
     puts <<~DOC
-
       Would you like to see another book?
       Enter #{Paint["'back'", :magenta]} to return to your chosen genre's books.
       Enter #{Paint["'list'", :magenta]} to return to view all genres.
@@ -144,7 +143,7 @@ class NotableBooks2018::CLI
     input = gets.chomp.downcase
 
     case input
-    when "back"
+      when "back"
         print_books_by_genre(@genre_name)
         select_book_by_number_through_genre
         print_book_info_from_genre(@book_index_from_genre)
@@ -172,7 +171,6 @@ class NotableBooks2018::CLI
       --------------------------------------------
       #{Paint["View Books Numbered:", :bright]}
       --------------------------------------------
-
       1-10
       11-20
       21-30
@@ -282,7 +280,6 @@ class NotableBooks2018::CLI
 
   def see_more_books
     puts <<~DOC
-
       Would you like to see another book?
       Enter #{Paint["'back'", :magenta]} to return to your selected list.
       Enter #{Paint["'list'", :magenta]} to return to the main list of books by number.
@@ -317,5 +314,5 @@ class NotableBooks2018::CLI
     puts "\nThank you for browsing Notable Books 2018. Happy reading!"
     exit
   end
-
+  
 end
