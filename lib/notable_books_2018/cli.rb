@@ -8,14 +8,16 @@ class NotableBooks2018::CLI
 
   def welcome
     puts "\n--------------------------------------------"
-    puts Paint["\nWelcome to Notable Books of 2018!", :bright]
+    puts Paint["\nWelcome to NYT's Notable Books of 2018!", :bright]
     puts "\n--------------------------------------------"
     puts <<~DOC
 
-      The New York Times Book Review published a list of notable new book releases in 2018.
-      You can use this gem to browse 2018's book selections and find more information about each book.
+      At the end of 2018, The New York Times Book Review published a list of the
+      notable new book releases from that year. You can use this gem to browse
+      2018's book selections and find more information about each book that
+      interests you.
 
-      You can view books by genre or view books by numbered list.
+      Would you like to browse books by genre or view all books?
     DOC
 
     choose_display
@@ -23,8 +25,8 @@ class NotableBooks2018::CLI
 
   def choose_display
     puts "\nEnter #{Paint["1", :magenta]} to view books by genre."
-    puts "Enter #{Paint["2", :magenta]} to view books by numbered list."
-    puts "Or, enter #{Paint["exit", :magenta]} to quit."
+    puts "Enter #{Paint["2", :magenta]} to view a list of all books."
+    puts "Or, enter #{Paint["'exit'", :magenta]} to quit."
 
     input = gets.chomp
     if input.to_i == 1
