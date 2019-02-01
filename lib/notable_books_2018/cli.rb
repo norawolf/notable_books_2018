@@ -69,7 +69,7 @@ class NotableBooks2018::CLI
     @genre_name = gets.chomp.downcase
 
     if @all_genre_names.include?(@genre_name)
-      display_books_by_genre(@genre_name)
+      print_books_by_genre(@genre_name)
     elsif @genre_name == "main"
       welcome
     elsif @genre_name == "exit"
@@ -80,7 +80,7 @@ class NotableBooks2018::CLI
     end
   end
 
-  def display_books_by_genre(genre_name)
+  def print_books_by_genre(genre_name)
     puts "\n--------------------------------------------"
     puts Paint["Viewing: #{genre_name.split.map(&:capitalize!).join(" ")}",
       :bright]
@@ -145,7 +145,7 @@ class NotableBooks2018::CLI
 
     case input
     when "back"
-        display_books_by_genre(@genre_name)
+        print_books_by_genre(@genre_name)
         select_book_by_number_through_genre
         print_book_info_from_genre(@book_index_from_genre)
         see_more_books_by_genre
@@ -280,10 +280,6 @@ class NotableBooks2018::CLI
     puts "\n--------------------------------------------"
   end
 
-  def wrap_text(txt, col = 80)
-    txt.gsub(/(.{1,#{col}})( +|$\n?)|(.{1,#{col}})/, "\\1\\3\n")
-  end
-
   def see_more_books
     puts <<~DOC
 
@@ -311,6 +307,10 @@ class NotableBooks2018::CLI
         puts "\nThat is not a valid selection."
         see_more_books
     end
+  end
+
+  def wrap_text(txt, col = 80)
+    txt.gsub(/(.{1,#{col}})( +|$\n?)|(.{1,#{col}})/, "\\1\\3\n")
   end
 
   def goodbye
