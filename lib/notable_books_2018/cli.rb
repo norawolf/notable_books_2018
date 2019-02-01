@@ -8,8 +8,8 @@ class NotableBooks2018::CLI
 
   def welcome
     puts "\n--------------------------------------------"
-    puts Paint["\nWelcome to NYT's Notable Books of 2018!", :bright]
-    puts "\n--------------------------------------------"
+    puts Paint["Welcome to NYT's Notable Books of 2018!", :bright]
+    puts "--------------------------------------------"
     puts <<~DOC
 
       At the end of 2018, The New York Times Book Review published a list of the
@@ -74,7 +74,7 @@ class NotableBooks2018::CLI
     elsif @genre_name == "exit"
       goodbye
     else
-      puts "That is not a valid entry."
+      puts "\nThat is not a valid entry."
       choose_genre
     end
   end
@@ -97,14 +97,16 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number_through_genre
-    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like to read more about."
-    puts "Or, you can enter #{Paint["'list'", :magenta]} to return the genre list or #{Paint["'exit'", :magenta]} to quit."
+    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
+      "to read more about."
+    puts "Or, Enter #{Paint["'back'", :magenta]} to return the genre list or "\
+      "#{Paint["'exit'", :magenta]} to quit."
 
     @book_index_from_genre = gets.chomp
 
     if @indices_from_genre.include?(@book_index_from_genre.to_i)
       print_book_info_from_genre(@book_index_from_genre.to_i)
-    elsif @book_index_from_genre == "list"
+    elsif @book_index_from_genre == "back"
       view_books_by_genre
     elsif @book_index_from_genre == "exit"
       goodbye
@@ -152,7 +154,7 @@ class NotableBooks2018::CLI
       when "exit"
         goodbye
       else
-        puts "That is not a valid selction."
+        puts "\nThat is not a valid selction."
         see_more_books_by_genre
     end
   end
@@ -174,7 +176,6 @@ class NotableBooks2018::CLI
       71-80
       81-90
       91-100
-
     DOC
   end
 
@@ -183,8 +184,8 @@ class NotableBooks2018::CLI
     @number_input = nil
 
     puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
-    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or"\
-      " #{Paint["'exit'", :magenta]} to quit."
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or "\
+    "#{Paint["'exit'", :magenta]} to quit."
 
     @number_input = gets.chomp
 
@@ -226,13 +227,15 @@ class NotableBooks2018::CLI
 
 
   def select_book_by_number
-    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like more information about."
-    puts "Enter #{Paint["'list'", :magenta]} to return to the book list or #{Paint["'exit'", :magenta]} to quit."
+    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
+      "more information about."
+    puts "Or, enter #{Paint["'back'", :magenta]} to return to the numbered "\
+      e"book list or #{Paint["'exit'", :magenta]} to quit."
     second_input = gets.chomp
 
     if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
       print_book_info(second_input.to_i)
-    elsif second_input == "list"
+    elsif second_input == "back"
       choose_books_by_num
     elsif second_input.downcase == "exit"
       goodbye
