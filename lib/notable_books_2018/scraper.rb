@@ -19,7 +19,7 @@ class NotableBooks2018::Scraper
        book_hash[:genre] = create_genres(nodeset.css(".g-book-tag").text
         .split(".").map!(&:strip).reject(&:empty?))
        book_hash[:description] = nodeset.css(".g-book-description").text.strip
-       book_hash[:other_info] = details.slice(1..-2).join(". ")
+       book_hash[:price] = details.sort.first
        book_hash[:publisher] = details.last.chomp(".")
        books_array << book_hash
       end
