@@ -129,10 +129,10 @@ class NotableBooks2018::CLI
     puts <<~DOC
 
       Would you like to see another book?
-        Enter #{Paint["'back'", :magenta]} to return to your chosen genre's books.
-        Enter #{Paint["'list'", :magenta]} to return to view all genres.
-        Enter #{Paint["'number'", :magenta]} to switch to browsing books by number.
-        Enter #{Paint["'exit'", :magenta]} to quit.
+      Enter #{Paint["'back'", :magenta]} to return to your chosen genre's books.
+      Enter #{Paint["'list'", :magenta]} to return to view all genres.
+      Enter #{Paint["'number'", :magenta]} to switch to browsing books by number.
+      Enter #{Paint["'exit'", :magenta]} to quit.
     DOC
 
     input = gets.chomp.downcase
@@ -252,7 +252,7 @@ class NotableBooks2018::CLI
     puts "by #{book.author}"
     puts "--------------------------------------------"
     puts "#{Paint["\nPublisher:", :bright]} #{book.publisher}"
-    puts "#{Paint["Other Details:", :bright]} #{book.other_info}."
+    puts "#{Paint["Price:", :bright]} #{book.price}."
     if book.genre.length == 1
       puts Paint["\nGenre:", :bright]
     else
@@ -274,10 +274,10 @@ class NotableBooks2018::CLI
     puts <<~DOC
 
       Would you like to see another book?
-        Enter #{Paint["'back'", :magenta]} to return to your selected list.
-        Enter #{Paint["'list'", :magenta]} to return to the main list of books by number.
-        Enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
-        Enter #{Paint["'exit'", :magenta]} to quit.
+      Enter #{Paint["'back'", :magenta]} to return to your selected list.
+      Enter #{Paint["'list'", :magenta]} to return to the main list of books by number.
+      Enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
+      Enter #{Paint["'exit'", :magenta]} to quit.
     DOC
 
     input = gets.chomp.downcase
