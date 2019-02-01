@@ -1,6 +1,6 @@
 # NotableBooks2018
 
-Welcome to Notable Books 2018! This gem is a CLI application that utilizes data from the New York Times Book Review's "100 Notable Books of 2018" list. You can browse books and find more information about your book selection. Happy reading!
+This gem is a CLI application that utilizes data from the New York Times Book Review's "100 Notable Books of 2018" list. You can browse books and find more information about your book selection. Happy reading!
 
 ## Installation
 
@@ -24,7 +24,7 @@ Run this gem by entering
 
   $ notable_books_2018
 
-and follow the prompts to navigate the gem. 
+and follow the prompts to navigate the gem.
 
 ## Development
 
