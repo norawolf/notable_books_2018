@@ -17,7 +17,7 @@ class NotableBooks2018::CLI
       2018's book selections and find more information about each book that
       interests you.
 
-      Would you like to browse books by genre or view all books?
+      Would you like to browse books by genre or view books by list number?
     DOC
 
     choose_display
@@ -25,7 +25,7 @@ class NotableBooks2018::CLI
 
   def choose_display
     puts "\nEnter #{Paint["1", :magenta]} to view books by genre."
-    puts "Enter #{Paint["2", :magenta]} to view a list of all books."
+    puts "Enter #{Paint["2", :magenta]} to view the numbered book list."
     puts "Or, enter #{Paint["'exit'", :magenta]} to quit."
 
     input = gets.chomp
@@ -161,8 +161,9 @@ class NotableBooks2018::CLI
     puts <<~DOC
 
       --------------------------------------------
-
       #{Paint["View Books Numbered:", :bright]}
+      --------------------------------------------
+
       1-10
       11-20
       21-30
@@ -181,8 +182,9 @@ class NotableBooks2018::CLI
     display_number_groups
     @number_input = nil
 
-    puts "\nPlease enter a #{Paint["number", :magenta]} to see a list of books."
-    puts "You can enter #{Paint["'main'", :magenta]} to return to the main menu or #{Paint["'exit'", :magenta]} to quit."
+    puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or"\
+      " #{Paint["'exit'", :magenta]} to quit."
 
     @number_input = gets.chomp
 
