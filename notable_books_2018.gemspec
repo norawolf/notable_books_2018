@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["norawolf"]
   spec.email         = ["noraevogt@gmail.com"]
 
-  spec.summary       = %q{Notable Books 2018 is a gem to browse the New York Times' best books of 2018 list.}
-  spec.description   = %q{Write a longer description or delete this line.}
+  spec.summary       = %q{A gem to browse the New York Times' Notable Books of 2018 list.}
   spec.homepage      = "https://github.com/norawolf/notable_books_2018"
   spec.license       = "MIT"
 
@@ -19,8 +18,8 @@ Gem::Specification.new do |spec|
   if spec.respond_to?(:metadata)
     #spec.metadata["allowed_push_host"] = "Set to 'http://mygemserver.com'"
 
-    #spec.metadata["homepage_uri"] = spec.homepage
-    #spec.metadata["source_code_uri"] = "Put your gem's public repo URL here."
+    spec.metadata["homepage_uri"] = spec.homepage
+    spec.metadata["source_code_uri"] = "https://github.com/norawolf/notable_books_2018"
     #spec.metadata["changelog_uri"] = "Put your gem's CHANGELOG.md URL here."
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
