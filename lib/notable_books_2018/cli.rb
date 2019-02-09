@@ -113,15 +113,15 @@ class NotableBooks2018::CLI
     puts "Or, enter #{Paint["'back'", :magenta]} to return the genre list or "\
       "#{Paint["'exit'", :magenta]} to quit."
 
-    @book_index_from_genre = gets.chomp
+    @index_from_genre = gets.chomp
 
     # is there another way to access the indices, apart from storing them in an instance variable?
     # or a better way?
-    if @indices_from_genre.include?(@book_index_from_genre.to_i)
-      print_book_info_from_genre #(@book_index_from_genre.to_i)
-    elsif @book_index_from_genre == "back"
+    if @indices_from_genre.include?(@index_from_genre.to_i)
+      print_book_info_from_genre #(@index_from_genre.to_i)
+    elsif @index_from_genre == "back"
       view_books_by_genre
-    elsif @book_index_from_genre == "exit"
+    elsif @index_from_genre == "exit"
       goodbye
     else
       puts "\nPlease enter a number between #{@indices_from_genre.first}-"\
@@ -133,8 +133,8 @@ class NotableBooks2018::CLI
   def print_book_info_from_genre
 
     #finds and returns the whole book instance
-    book_info_contents(@genre_obj.find_by_index(@book_index_from_genre))
-      # if index == @book_index_from_genre
+    book_info_contents(@genre_obj.find_by_index(@index_from_genre))
+      # if index == @index_from_genre
       #   book_info_contents(book)
       # end
 
