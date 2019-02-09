@@ -54,6 +54,7 @@ class NotableBooks2018::CLI
     puts "--------------------------------------------"
     puts "\n"
 
+
     @all_genre_names = []
     NotableBooks2018::Genre.all.collect do |genre|
       puts genre.name
@@ -66,10 +67,11 @@ class NotableBooks2018::CLI
     puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or "\
       "#{Paint["'exit'", :magenta]} to quit."
 
-    @genre_name = gets.chomp.downcase
+    genre_name = gets.chomp.downcase
 
-    if @all_genre_names.include?(@genre_name)
-      print_books_by_genre(@genre_name)
+    if @all_genre_names.include?(genre_name)
+      @genre_obj = NotableBooks2018::Genre.find_by_name(genre_name)
+      print_books_by_genre
     elsif @genre_name == "main"
       welcome
     elsif @genre_name == "exit"
@@ -80,24 +82,31 @@ class NotableBooks2018::CLI
     end
   end
 
-  def print_books_by_genre(genre_name)
+## working here to get rid of passed in argument, just use @genre_obj
+  def print_books_by_genre
     puts "\n--------------------------------------------"
-    puts Paint["Viewing: #{genre_name.split.map(&:capitalize!).join(" ")}",
+    puts Paint["Viewing: #{@genre_obj.name.split.map(&:capitalize!).join(" ")}",
       :bright]
     puts "--------------------------------------------"
     puts ""
 
     @indices_from_genre = []
-    NotableBooks2018::Genre.all.each do |genre|
-      if genre_name == genre.name.downcase
-        genre.books.each.with_index(1) do |book, index|
-          puts "#{index}. #{book.title} by #{book.author}"
-          @indices_from_genre << index.to_i
-        end
-      end
+
+    @genre_obj.books.each.with_index(1) do |book, index|
+      puts "#{index}. #{book.title} by #{book.author}"
+      @indices_from_genre << index
     end
+    # NotableBooks2018::Genre.all.each do |genre|
+    #   if genre_name == genre.name.downcase
+    #     genre.books.each.with_index(1) do |book, index|
+    #       puts "#{index}. #{book.title} by #{book.author}"
+    #       @indices_from_genre << index.to_i
+    #     end
+    #   end
+    # end
   end
 
+  #refactor print_book_info_from_genre, then refactor this method
   def select_book_by_number_through_genre
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "to read more about."
@@ -106,8 +115,9 @@ class NotableBooks2018::CLI
 
     @book_index_from_genre = gets.chomp
 
+    # is there another way to access the indices, apart from storing them in an instance variable?
     if @indices_from_genre.include?(@book_index_from_genre.to_i)
-      print_book_info_from_genre(@book_index_from_genre.to_i)
+      print_book_info_from_genre #(@book_index_from_genre.to_i)
     elsif @book_index_from_genre == "back"
       view_books_by_genre
     elsif @book_index_from_genre == "exit"
@@ -265,12 +275,12 @@ class NotableBooks2018::CLI
     puts "--------------------------------------------"
     puts "#{Paint["\nPublisher:", :bright]} #{book.publisher}"
     puts "#{Paint["Price:", :bright]} #{book.price}"
-    if book.genre.length == 1
+    if book.genres.length == 1
       puts Paint["\nGenre:", :bright]
     else
       puts Paint["\nGenres:", :bright]
     end
-    book.genre.collect do |genre|
+    book.genres.collect do |genre|
       puts "#{genre.name}"
     end
     puts Paint["\nDescription:",:bright]
@@ -314,5 +324,5 @@ class NotableBooks2018::CLI
     puts "\nThank you for browsing Notable Books 2018. Happy reading!"
     exit
   end
-  
+
 end
