@@ -116,6 +116,7 @@ class NotableBooks2018::CLI
     @book_index_from_genre = gets.chomp
 
     # is there another way to access the indices, apart from storing them in an instance variable?
+    # or a better way?
     if @indices_from_genre.include?(@book_index_from_genre.to_i)
       print_book_info_from_genre #(@book_index_from_genre.to_i)
     elsif @book_index_from_genre == "back"
@@ -129,16 +130,23 @@ class NotableBooks2018::CLI
     end
   end
 
-  def print_book_info_from_genre(book_index)
-    NotableBooks2018::Genre.all.each do |genre_instance|
-      if @genre_name == genre_instance.name.downcase
-        genre_instance.books.each.with_index(1) do |book, index|
-          if book_index == index
-            book_info_contents(book)
-          end
-        end
-      end
-    end
+  def print_book_info_from_genre
+
+    #finds and returns the whole book instance
+    book_info_contents(@genre_obj.find_by_index(@book_index_from_genre))
+      # if index == @book_index_from_genre
+      #   book_info_contents(book)
+      # end
+
+    # NotableBooks2018::Genre.all.each do |genre_instance|
+    #   if @genre_name == genre_instance.name.downcase
+    #     genre_instance.books.each.with_index(1) do |book, index|
+    #       if book_index == index
+    #         book_info_contents(book)
+    #       end
+    #     end
+    #   end
+    # end
   end
 
   def see_more_books_by_genre
@@ -154,9 +162,9 @@ class NotableBooks2018::CLI
 
     case input
       when "back"
-        print_books_by_genre(@genre_name)
+        print_books_by_genre
         select_book_by_number_through_genre
-        print_book_info_from_genre(@book_index_from_genre)
+        print_book_info_from_genre
         see_more_books_by_genre
       when "list"
         view_books_by_genre
