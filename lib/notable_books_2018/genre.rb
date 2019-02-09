@@ -26,4 +26,10 @@ class NotableBooks2018::Genre
   def self.find_or_create_by_name(name)
     find_by_name(name) || create_by_name(name)
   end
+
+#@books is the array of book instances for a particular genre
+  def find_by_index(index)
+    @books[(index.to_i)-1]
+  end
+
 end
