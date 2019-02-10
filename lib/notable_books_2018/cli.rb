@@ -55,7 +55,7 @@ class NotableBooks2018::CLI
     puts "\n"
 
     NotableBooks2018::Genre.all_names.each do |name|
-      puts name.split.map(&:capitalize).join(" ")
+      puts format_genre(name)
     end
   end
 
@@ -81,8 +81,7 @@ class NotableBooks2018::CLI
 
   def print_books_by_genre
     puts "\n--------------------------------------------"
-    puts Paint["Viewing: #{@genre_obj.name.split.map(&:capitalize!).join(" ")}",
-      :bright]
+    puts Paint["Viewing: #{format_genre(@genre_obj.name)}", :bright]
     puts "--------------------------------------------"
     puts ""
 
@@ -251,8 +250,7 @@ class NotableBooks2018::CLI
       puts Paint["\nGenres:", :bright]
     end
     book.genres.collect do |genre|
-      #I use this .split etc formatting twice. DRY it?
-      puts "#{genre.name.split.map(&:capitalize).join(" ")}"
+      puts "#{format_genre(genre.name)}"
     end
     puts Paint["\nDescription:",:bright]
     puts "#{wrap_text(book.description)}"
@@ -284,6 +282,14 @@ class NotableBooks2018::CLI
       else
         not_valid
         see_more_books
+    end
+  end
+
+  def format_genre(name)
+    if name.include?("/")
+      name.split("/").map(&:capitalize).join("/")
+    else
+      name.split.map(&:capitalize!).join(" ")
     end
   end
 
