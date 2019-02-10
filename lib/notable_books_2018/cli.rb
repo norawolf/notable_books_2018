@@ -289,7 +289,7 @@ class NotableBooks2018::CLI
     if name.include?("/")
       name.split("/").map(&:capitalize).join("/")
     else
-      name.split.map(&:capitalize!).join(" ")
+      name.split.map(&:capitalize).join(" ")
     end
   end
 
