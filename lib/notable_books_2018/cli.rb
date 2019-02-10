@@ -96,13 +96,13 @@ class NotableBooks2018::CLI
     puts "Or, enter #{Paint["'back'", :magenta]} to return the genre list."
     print_quit_choice
 
-    @index_from_genre = gets.chomp
+    @index_input = gets.chomp
 
-    if (1..@genre_obj.books.size).include?(@index_from_genre.to_i)
-      print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
-    elsif @index_from_genre == "back"
+    if (1..@genre_obj.books.size).include?(@index_input.to_i)
+      print_book_attributes(@genre_obj.find_by_index(@index_input))
+    elsif @index_input == "back"
       view_books_by_genre
-    elsif @index_from_genre == "exit"
+    elsif @index_input == "exit"
       goodbye
     else
       puts "\nPlease enter a number between 1-#{@genre_obj.books.size}."
@@ -125,7 +125,7 @@ class NotableBooks2018::CLI
       when "back"
         print_books_by_genre
         select_book_by_number_through_genre
-        print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
+        print_book_attributes(@genre_obj.find_by_index(@index_input))
         see_more_books_by_genre
       when "list"
         view_books_by_genre
