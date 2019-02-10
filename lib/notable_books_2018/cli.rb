@@ -61,7 +61,7 @@ class NotableBooks2018::CLI
 
   def choose_genre
     puts "\nEnter a #{Paint["genre name", :magenta]} to browse books by genre."
-    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu."
+    print_main_menu_choice
     print_quit_choice
 
     genre_name = gets.chomp.downcase
@@ -174,7 +174,7 @@ class NotableBooks2018::CLI
     @number_input = nil
 
     puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
-    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu."
+    print_main_menu_choice
     print_quit_choice
 
     @number_input = gets.chomp
@@ -296,6 +296,10 @@ class NotableBooks2018::CLI
 
   def print_quit_choice
     puts "Enter #{Paint["'exit'", :magenta]} to quit."
+  end
+
+  def print_main_menu_choice
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu."
   end
 
   def wrap_text(txt, col = 80)
