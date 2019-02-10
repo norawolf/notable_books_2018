@@ -105,7 +105,7 @@ class NotableBooks2018::CLI
     # is there another way to access the indices, apart from storing them in an instance variable?
     # or a better way?
     if @indices_from_genre.include?(@index_from_genre.to_i)
-      print_book_info_from_genre
+      print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
     elsif @index_from_genre == "back"
       view_books_by_genre
     elsif @index_from_genre == "exit"
@@ -115,11 +115,6 @@ class NotableBooks2018::CLI
       "#{@indices_from_genre.last}."
       select_book_by_number_through_genre
     end
-  end
-
-  def print_book_info_from_genre
-    #finds and returns the whole book instance
-    print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
   end
 
   def see_more_books_by_genre
@@ -137,7 +132,7 @@ class NotableBooks2018::CLI
       when "back"
         print_books_by_genre
         select_book_by_number_through_genre
-        print_book_info_from_genre
+        print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
         see_more_books_by_genre
       when "list"
         view_books_by_genre
@@ -262,6 +257,7 @@ class NotableBooks2018::CLI
       puts Paint["\nGenres:", :bright]
     end
     book.genres.collect do |genre|
+      #fix to capitalize here
       puts "#{genre.name}"
     end
     puts Paint["\nDescription:",:bright]
