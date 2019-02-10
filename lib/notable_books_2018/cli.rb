@@ -165,8 +165,10 @@ class NotableBooks2018::CLI
   def choose_books_by_num
     @number_input = nil
 
-    puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
-    puts "You can choose a number suggested above or enter any number."
+    puts "\nTo browse books, you can enter a number suggested above"
+    puts "or enter any number 1 - 100 to start the list."
+    puts "\nEnter a #{Paint["number", :magenta]} number to generate a list of books."
+
     print_main_menu_choice
     print_quit_choice
 
@@ -229,14 +231,6 @@ class NotableBooks2018::CLI
       select_book_by_number
     end
   end
-
-  # def print_book_info(book_index)
-  #   NotableBooks2018::Book.all.each.with_index(1) do |book, index|
-  #     if index == book_index
-  #       print_book_attributes(book)
-  #     end
-  #   end
-  # end
 
   def print_book_attributes(book)
     puts "\n--------------------------------------------"
