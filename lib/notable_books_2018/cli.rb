@@ -72,9 +72,9 @@ class NotableBooks2018::CLI
     if @all_genre_names.include?(genre_name)
       @genre_obj = NotableBooks2018::Genre.find_by_name(genre_name)
       print_books_by_genre
-    elsif @genre_name == "main"
+    elsif genre_name == "main"
       welcome
-    elsif @genre_name == "exit"
+    elsif genre_name == "exit"
       goodbye
     else
       puts "\nThat is not a valid entry."
