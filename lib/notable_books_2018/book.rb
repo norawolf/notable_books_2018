@@ -29,4 +29,8 @@ class NotableBooks2018::Book
     end
   end
 
+  def self.find_by_index(index)
+    all[(index.to_i) - 1]
+  end
+
 end
