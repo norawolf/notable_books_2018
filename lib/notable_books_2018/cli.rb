@@ -54,11 +54,8 @@ class NotableBooks2018::CLI
     puts "--------------------------------------------"
     puts "\n"
 
-
-    @all_genre_names = []
-    NotableBooks2018::Genre.all.collect do |genre|
-      puts genre.name
-      @all_genre_names << genre.name.downcase
+    NotableBooks2018::Genre.all_names.each do |name|
+      puts name.split.map(&:capitalize).join(" ")
     end
   end
 
@@ -69,7 +66,7 @@ class NotableBooks2018::CLI
 
     genre_name = gets.chomp.downcase
 
-    if @all_genre_names.include?(genre_name)
+    if NotableBooks2018::Genre.all_names.include?(genre_name)
       @genre_obj = NotableBooks2018::Genre.find_by_name(genre_name)
       print_books_by_genre
     elsif genre_name == "main"
