@@ -95,8 +95,7 @@ class NotableBooks2018::CLI
   end
 
   def select_book_by_number_through_genre
-    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
-      "to read more about."
+    print_read_more
     puts "Or, enter #{Paint["'back'", :magenta]} to return the genre list."
     print_quit_choice
 
@@ -174,6 +173,7 @@ class NotableBooks2018::CLI
     @number_input = nil
 
     puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
+    puts "You can choose a number suggested above or enter any number."
     print_main_menu_choice
     print_quit_choice
 
@@ -218,8 +218,7 @@ class NotableBooks2018::CLI
 
 
   def select_book_by_number
-    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
-      "more information about."
+    print_read_more
     puts "Or, enter #{Paint["'back'", :magenta]} to return to the numbered book list"
     print_quit_choice
 
@@ -304,6 +303,11 @@ class NotableBooks2018::CLI
 
   def not_valid
     puts "\nThat is not a valid selction."
+  end
+
+  def print_read_more
+    puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
+      "to read more about."
   end
 
   def wrap_text(txt, col = 80)
