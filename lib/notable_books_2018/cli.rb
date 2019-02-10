@@ -117,8 +117,8 @@ class NotableBooks2018::CLI
   end
 
   def see_more_books_by_genre
+    print_see_another
     puts <<~DOC
-      Would you like to see another book?
       Enter #{Paint["'back'", :magenta]} to return to your chosen genre's books.
       Enter #{Paint["'list'", :magenta]} to return to view all genres.
       Enter #{Paint["'number'", :magenta]} to switch to browsing books by number.
@@ -266,8 +266,8 @@ class NotableBooks2018::CLI
   end
 
   def see_more_books
+    print_see_another
     puts <<~DOC
-      Would you like to see another book?
       Enter #{Paint["'back'", :magenta]} to return to your selected list.
       Enter #{Paint["'list'", :magenta]} to return to the main list of books by number.
       Enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
@@ -308,6 +308,10 @@ class NotableBooks2018::CLI
   def print_read_more
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "to read more about."
+  end
+
+  def print_see_another
+    puts "Would you like to see another book?"
   end
 
   def wrap_text(txt, col = 80)
