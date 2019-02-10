@@ -219,7 +219,7 @@ class NotableBooks2018::CLI
     second_input = gets.chomp
 
     if (@number_input..@number_input+9).include?(second_input.to_i)
-      print_book_info(second_input.to_i)
+      print_book_attributes(NotableBooks2018::Book.find_by_index(second_input.to_i))
     elsif second_input == "back"
       view_books_by_num
     elsif second_input.downcase == "exit"
@@ -230,13 +230,13 @@ class NotableBooks2018::CLI
     end
   end
 
-  def print_book_info(book_index)
-    NotableBooks2018::Book.all.each.with_index(1) do |book, index|
-      if index == book_index
-        print_book_attributes(book)
-      end
-    end
-  end
+  # def print_book_info(book_index)
+  #   NotableBooks2018::Book.all.each.with_index(1) do |book, index|
+  #     if index == book_index
+  #       print_book_attributes(book)
+  #     end
+  #   end
+  # end
 
   def print_book_attributes(book)
     puts "\n--------------------------------------------"
