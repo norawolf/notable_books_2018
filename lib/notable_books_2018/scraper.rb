@@ -10,13 +10,13 @@ class NotableBooks2018::Scraper
        book_hash = {}
 
        details = nodeset.css(".g-book-author").text
-        .split(". ").map!(&:strip)
+        .split(". ").map(&:strip)
 
        book_hash[:title] = nodeset.css(".g-book-title").text.strip
        book_hash[:author] = nodeset.css(".g-book-author b").text.strip.chomp(".")
        #added downcasing to standardize genre name here
        book_hash[:genres] = create_genres(nodeset.css(".g-book-tag").text
-        .split(".").map!(&:strip).map!(&:downcase).reject(&:empty?))
+        .split(".").map(&:strip).map(&:downcase).reject(&:empty?))
        book_hash[:description] = nodeset.css(".g-book-description").text.strip
        book_hash[:price] = details.sort.first
        book_hash[:publisher] = details.last.chomp(".")
