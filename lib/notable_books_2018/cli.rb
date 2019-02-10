@@ -36,7 +36,7 @@ class NotableBooks2018::CLI
     elsif input == "exit"
       goodbye
     else
-      puts "\nThat is not a valid selection."
+      not_valid
       choose_display
     end
   end
@@ -74,7 +74,7 @@ class NotableBooks2018::CLI
     elsif genre_name == "exit"
       goodbye
     else
-      puts "\nThat is not a valid entry."
+      not_valid
       choose_genre
     end
   end
@@ -141,7 +141,7 @@ class NotableBooks2018::CLI
       when "exit"
         goodbye
       else
-        puts "\nThat is not a valid selction."
+        not_valid
         see_more_books_by_genre
     end
   end
@@ -188,7 +188,7 @@ class NotableBooks2018::CLI
     elsif @number_input.downcase == "exit"
       goodbye
     else
-      puts "\nThat is not a valid selection."
+      not_valid
       choose_books_by_num
     end
     puts ""
@@ -289,7 +289,7 @@ class NotableBooks2018::CLI
       when "exit"
         goodbye
       else
-        puts "\nThat is not a valid selection."
+        not_valid
         see_more_books
     end
   end
@@ -300,6 +300,10 @@ class NotableBooks2018::CLI
 
   def print_main_menu_choice
     puts "Enter #{Paint["'main'", :magenta]} to return to the main menu."
+  end
+
+  def not_valid
+    puts "\nThat is not a valid selction."
   end
 
   def wrap_text(txt, col = 80)
