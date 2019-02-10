@@ -82,7 +82,6 @@ class NotableBooks2018::CLI
     end
   end
 
-## working here to get rid of passed in argument, just use @genre_obj
   def print_books_by_genre
     puts "\n--------------------------------------------"
     puts Paint["Viewing: #{@genre_obj.name.split.map(&:capitalize!).join(" ")}",
@@ -96,17 +95,8 @@ class NotableBooks2018::CLI
       puts "#{index}. #{book.title} by #{book.author}"
       @indices_from_genre << index
     end
-    # NotableBooks2018::Genre.all.each do |genre|
-    #   if genre_name == genre.name.downcase
-    #     genre.books.each.with_index(1) do |book, index|
-    #       puts "#{index}. #{book.title} by #{book.author}"
-    #       @indices_from_genre << index.to_i
-    #     end
-    #   end
-    # end
   end
 
-  #refactor print_book_info_from_genre, then refactor this method
   def select_book_by_number_through_genre
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "to read more about."
@@ -118,7 +108,7 @@ class NotableBooks2018::CLI
     # is there another way to access the indices, apart from storing them in an instance variable?
     # or a better way?
     if @indices_from_genre.include?(@index_from_genre.to_i)
-      print_book_info_from_genre #(@index_from_genre.to_i)
+      print_book_info_from_genre
     elsif @index_from_genre == "back"
       view_books_by_genre
     elsif @index_from_genre == "exit"
@@ -131,22 +121,8 @@ class NotableBooks2018::CLI
   end
 
   def print_book_info_from_genre
-
     #finds and returns the whole book instance
-    book_info_contents(@genre_obj.find_by_index(@index_from_genre))
-      # if index == @index_from_genre
-      #   book_info_contents(book)
-      # end
-
-    # NotableBooks2018::Genre.all.each do |genre_instance|
-    #   if @genre_name == genre_instance.name.downcase
-    #     genre_instance.books.each.with_index(1) do |book, index|
-    #       if book_index == index
-    #         book_info_contents(book)
-    #       end
-    #     end
-    #   end
-    # end
+    print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
   end
 
   def see_more_books_by_genre
@@ -271,12 +247,12 @@ class NotableBooks2018::CLI
   def print_book_info(book_index)
     NotableBooks2018::Book.all.each.with_index(1) do |book, index|
       if index == book_index
-        book_info_contents(book)
+        print_book_attributes(book)
       end
     end
   end
 
-  def book_info_contents(book)
+  def print_book_attributes(book)
     puts "\n--------------------------------------------"
     puts Paint["#{book.title}", :bright]
     puts "by #{book.author}"
