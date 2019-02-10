@@ -258,7 +258,7 @@ class NotableBooks2018::CLI
     end
     book.genres.collect do |genre|
       #fix to capitalize here
-      puts "#{genre.name}"
+      puts "#{genre.name.split.map(&:capitalize).join(" ")}"
     end
     puts Paint["\nDescription:",:bright]
     puts "#{wrap_text(book.description)}"
