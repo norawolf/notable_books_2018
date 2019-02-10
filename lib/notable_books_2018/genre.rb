@@ -32,4 +32,10 @@ class NotableBooks2018::Genre
     @books[(index.to_i)-1]
   end
 
+  def self.list_genre_names
+    all.each do |genre|
+      puts genre.name.split.map(&:capitalize).join(" ")
+    end
+  end
+
 end
