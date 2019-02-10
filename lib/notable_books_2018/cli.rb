@@ -249,7 +249,7 @@ class NotableBooks2018::CLI
     else
       puts Paint["\nGenres:", :bright]
     end
-    book.genres.collect do |genre|
+    book.genres.each do |genre|
       puts "#{format_genre(genre.name)}"
     end
     puts Paint["\nDescription:",:bright]
