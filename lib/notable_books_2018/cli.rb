@@ -86,11 +86,8 @@ class NotableBooks2018::CLI
     puts "--------------------------------------------"
     puts ""
 
-    @indices_from_genre = []
-
     @genre_obj.books.each.with_index(1) do |book, index|
       puts "#{index}. #{book.title} by #{book.author}"
-      @indices_from_genre << index
     end
   end
 
@@ -101,17 +98,14 @@ class NotableBooks2018::CLI
 
     @index_from_genre = gets.chomp
 
-    # is there another way to access the indices, apart from storing them in an instance variable?
-    # or a better way?
-    if @indices_from_genre.include?(@index_from_genre.to_i)
+    if (1..@genre_obj.books.size).include?(@index_from_genre.to_i)
       print_book_attributes(@genre_obj.find_by_index(@index_from_genre))
     elsif @index_from_genre == "back"
       view_books_by_genre
     elsif @index_from_genre == "exit"
       goodbye
     else
-      puts "\nPlease enter a number between #{@indices_from_genre.first}-"\
-      "#{@indices_from_genre.last}."
+      puts "\nPlease enter a number between 1-#{@genre_obj.books.size}."
       select_book_by_number_through_genre
     end
   end
