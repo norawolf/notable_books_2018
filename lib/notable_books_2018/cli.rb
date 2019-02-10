@@ -173,7 +173,8 @@ class NotableBooks2018::CLI
     @number_input = gets.chomp
 
     if (1..100).include?(@number_input.to_i)
-      print_book_list(@number_input.to_i)
+      @number_input = @number_input.to_i
+      print_book_list
       select_book_by_number
       see_more_books
     elsif @number_input.downcase == "main"
@@ -187,24 +188,24 @@ class NotableBooks2018::CLI
     puts ""
   end
 
-  def print_book_list(by_number)
-    if by_number == 100
+  def print_book_list
+    if @number_input == 100
       puts "\n--------------------------------------------"
       puts "#{Paint["Displaying The 100th Notable Book", :bright]}"
       puts "--------------------------------------------"
-    elsif by_number >= 92 && by_number != 100
+    elsif @number_input >= 92 && @number_input != 100
       puts "\n--------------------------------------------"
-      puts "#{Paint["Displaying Notable Books #{by_number} - 100", :bright]}"
+      puts "#{Paint["Displaying Notable Books #{@number_input} - 100", :bright]}"
       "--------------------------------------------"
     else
       puts "\n--------------------------------------------"
-      puts "#{Paint["Displaying Notable Books #{by_number} - #{by_number+9}",
+      puts "#{Paint["Displaying Notable Books #{@number_input} - #{@number_input+9}",
         :bright]}"
       puts "--------------------------------------------"
       puts ""
     end
 
-    NotableBooks2018::Book.all[by_number-1, 10].each.with_index(by_number) do |book, index|
+    NotableBooks2018::Book.all[@number_input-1, 10].each.with_index(@number_input) do |book, index|
         puts "#{index}. #{book.title} by #{book.author}"
     end
   end
@@ -217,7 +218,7 @@ class NotableBooks2018::CLI
 
     second_input = gets.chomp
 
-    if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
+    if (@number_input..@number_input+9).include?(second_input.to_i)
       print_book_info(second_input.to_i)
     elsif second_input == "back"
       view_books_by_num
@@ -270,7 +271,7 @@ class NotableBooks2018::CLI
 
     case input
     when "back"
-        print_book_list(@number_input.to_i)
+        print_book_list
         select_book_by_number
         see_more_books
       when "list"
