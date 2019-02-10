@@ -26,7 +26,7 @@ class NotableBooks2018::CLI
   def choose_display
     puts "\nEnter #{Paint["1", :magenta]} to view books by genre."
     puts "Enter #{Paint["2", :magenta]} to view the numbered book list."
-    puts "Or, enter #{Paint["'exit'", :magenta]} to quit."
+    print_quit_choice
 
     input = gets.chomp
     if input.to_i == 1
@@ -61,8 +61,8 @@ class NotableBooks2018::CLI
 
   def choose_genre
     puts "\nEnter a #{Paint["genre name", :magenta]} to browse books by genre."
-    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or "\
-      "#{Paint["'exit'", :magenta]} to quit."
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu."
+    print_quit_choice
 
     genre_name = gets.chomp.downcase
 
@@ -97,8 +97,8 @@ class NotableBooks2018::CLI
   def select_book_by_number_through_genre
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "to read more about."
-    puts "Or, enter #{Paint["'back'", :magenta]} to return the genre list or "\
-      "#{Paint["'exit'", :magenta]} to quit."
+    puts "Or, enter #{Paint["'back'", :magenta]} to return the genre list."
+    print_quit_choice
 
     @index_from_genre = gets.chomp
 
@@ -123,8 +123,8 @@ class NotableBooks2018::CLI
       Enter #{Paint["'back'", :magenta]} to return to your chosen genre's books.
       Enter #{Paint["'list'", :magenta]} to return to view all genres.
       Enter #{Paint["'number'", :magenta]} to switch to browsing books by number.
-      Enter #{Paint["'exit'", :magenta]} to quit.
     DOC
+    print_quit_choice
 
     input = gets.chomp.downcase
 
@@ -174,8 +174,8 @@ class NotableBooks2018::CLI
     @number_input = nil
 
     puts "\nEnter a #{Paint["number", :magenta]} to see a list of books."
-    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu or "\
-    "#{Paint["'exit'", :magenta]} to quit."
+    puts "Enter #{Paint["'main'", :magenta]} to return to the main menu."
+    print_quit_choice
 
     @number_input = gets.chomp
 
@@ -220,8 +220,9 @@ class NotableBooks2018::CLI
   def select_book_by_number
     puts "\nEnter the #{Paint["number", :magenta]} of a book you would like "\
       "more information about."
-    puts "Or, enter #{Paint["'back'", :magenta]} to return to the numbered "\
-      "book list or #{Paint["'exit'", :magenta]} to quit."
+    puts "Or, enter #{Paint["'back'", :magenta]} to return to the numbered book list"
+    print_quit_choice
+
     second_input = gets.chomp
 
     if ((@number_input.to_i)..((@number_input.to_i)+9)).include?(second_input.to_i)
@@ -257,7 +258,7 @@ class NotableBooks2018::CLI
       puts Paint["\nGenres:", :bright]
     end
     book.genres.collect do |genre|
-      #fix to capitalize here
+      #I use this .split etc formatting twice. DRY it?
       puts "#{genre.name.split.map(&:capitalize).join(" ")}"
     end
     puts Paint["\nDescription:",:bright]
@@ -271,8 +272,8 @@ class NotableBooks2018::CLI
       Enter #{Paint["'back'", :magenta]} to return to your selected list.
       Enter #{Paint["'list'", :magenta]} to return to the main list of books by number.
       Enter #{Paint["'genre'", :magenta]} to switch to browsing books by genre.
-      Enter #{Paint["'exit'", :magenta]} to quit.
     DOC
+    print_quit_choice
 
     input = gets.chomp.downcase
 
@@ -291,6 +292,10 @@ class NotableBooks2018::CLI
         puts "\nThat is not a valid selection."
         see_more_books
     end
+  end
+
+  def print_quit_choice
+    puts "Enter #{Paint["'exit'", :magenta]} to quit."
   end
 
   def wrap_text(txt, col = 80)
