@@ -3,7 +3,7 @@ class NotableBooks2018::Book
   @@all = []
 
   attr_accessor :title, :author, :description, :publisher, :price
-  attr_reader :genre
+  attr_reader :genres
 
   def self.all
     @@all
@@ -16,9 +16,9 @@ class NotableBooks2018::Book
     @@all << self
   end
 
-  def genre=(genre)
-    @genre = genre
-    genre.each do |genre_instance|
+  def genres=(genres)
+    @genres = genres
+    genres.each do |genre_instance|
       genre_instance.books << self
     end
   end
